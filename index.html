@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>SCP Live</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <style>
+        body {
+            background-image: radial-gradient(ellipse at center, #667986 0%, #3c474f 100%);
+        }
+        
+        html {
+            min-height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div id="content" class="text-center">
+            <img src="/loading.gif " style="width: 60px;" />
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script type="text/javascript ">
+    var DOMAIN = "scp.pfortner.co.za";
+
+    var xmlHttp = new XMLHttpRequest();
+    // xmlHttp.open("post ", "https:// " + DOMAIN + "/request/api/session/login ", false);
+    // xmlHttp.withCredentials = true;
+    // xmlHttp.setRequestHeader("Content-Type ", "application/x-www-form-urlencoded; charset=UTF-8 ");
+    // xmlHttp.send(encodeURI("username=ruans&password=P@55w0rd "));
+
+
+
+    function sessionAccess(callback) {
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("post", "https://" + DOMAIN + "/request/api/session/access", true);
+        xmlHttp.withCredentials = true;
+        xmlHttp.send(null);
+        xmlHttp.onload = function(e) {
+            if (xmlHttp.readyState === 4) {
+                if (xmlHttp.status === 200) {
+                    callback(xmlHttp.responseText);
+                }
+            }
+        };
+    }
+
+    function conversationsList(callback) {
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("post", "https://" + DOMAIN + "/request/api/conversations/list", true);
+        xmlHttp.withCredentials = true;
+        xmlHttp.send(null);
+        xmlHttp.onload = function(e) {
+            if (xmlHttp.readyState === 4) {
+                if (xmlHttp.status === 200) {
+                    callback(xmlHttp.responseText);
+                }
+            }
+        };
+    }
+
+    function showHomeScreen() {
+        conversationsList(function(response) {
+
+
+            json = JSON.parse(response);
+
+
+            renderMessage(items[0]);
+
+        });
+    }
+
+    function renderMessage(root, item) {
+
+
+
+    }
+
+    sessionAccess(function(response) {
+        if (response > 0) {
+            showHomeScreen();
+        } else {
+            alert("Please log into SCP");
+        }
+    });
+
+    // xmlHttp.open("post ", "https:// " + DOMAIN + "/request/api/myaccount/details ", false);
+    // xmlHttp.withCredentials = true;
+    // xmlHttp.send(null);
+
+    // details = JSON.parse(xmlHttp.responseText);
+
+    // div = document.createElement("div ");
+    // div.innerHTML = "Welcome " + details.name_first + " " + details.name_last;
+    //document.getElementById("content ").appendChild(div);
+
+    // xmlHttp.open("post ", "https:// " + DOMAIN + "/request/api/session/logout ", false);
+    // xmlHttp.withCredentials = true;
+    // xmlHttp.send(null);
+</script>

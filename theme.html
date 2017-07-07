@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body style="margin: 0; padding: 0">
+    <div id="top-navigation-bar" style="overflow-y: scroll; float: left; background-color: gray;">
+    </div>
+
+    <div id="navigation-bar" style="overflow-y: scroll; float: left; background-color: white;box-shadow: inset 76px 0px 90px -60px rgba(204,204,204,1);">
+    </div>
+
+    <div id="content" style="overflow-y: scroll; float: left;box-shadow: inset 76px 0px 90px -60px rgba(204,204,204,1);">
+    </div>
+
+    <div style="clear: both;"></div>
+</body>
+
+<script type="text/javascript">
+    // ########## RESIZING ##########
+    topNavigationBar = document.getElementById("top-navigation-bar");
+    navigationBar = document.getElementById("navigation-bar");
+    content = document.getElementById("content");
+
+    function resize() {
+        topNavigationBar.style.width = window.innerWidth < 600 ? "60px" : "80px";
+        topNavigationBar.style.height = window.innerHeight + "px";
+
+        navigationBar.style.width = window.innerWidth < 600 ? "0px" : "300px";
+        navigationBar.style.height = window.innerHeight + "px";
+
+        content.style.width = window.innerWidth - navigationBar.offsetWidth - topNavigationBar.offsetWidth + "px";
+        content.style.height = window.innerHeight + "px";
+    }
+
+    resize();
+
+    window.onresize = function() {
+        resize();
+    }
+
+    // ########## CONTENT ##########
+    for (var i = 0; i < 20; i++) {
+        var conversation = document.createElement("div");
+        conversation.style.height = "60px";
+        conversation.style.width = "100%";
+
+        conversation.style.overflowX = "hidden";
+
+        if (i === 2) {
+            conversation.style.boxShadow = "0px 0px 30px 5px rgba(161, 252, 128, 0.5)";
+            conversation.style.backgroundColor = "#8ef469";
+        }
+
+        img = document.createElement("img");
+        img.src = "https://scp.pfortner.co.za/media/avatar/0/50x50";
+        img.style.borderRadius = "25px";
+        img.style.boxShadow = "1px 3px 4px 1px #ccc";
+
+        conversation.appendChild(img);
+
+        navigationBar.appendChild(conversation);
+    }
+</script>
+
+</html>

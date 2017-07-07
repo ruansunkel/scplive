@@ -12,81 +12,88 @@
     <link rel="stylesheet" href="dist/css/skins/skin-blue-light.css">
     <link rel="stylesheet" href="plugins/pace/pace.min.css">
 
- 
+
 
     <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
     <style>
-        .direct-chat-warning .right>.direct-chat-text:after, .direct-chat-warning .right>.direct-chat-text:before {
-    border-left-color: #5EA5CF;
-}
+        .direct-chat-warning .right>.direct-chat-text:after,
+        .direct-chat-warning .right>.direct-chat-text:before {
+            border-left-color: #5EA5CF;
+        }
         
-    .direct-chat-warning .right>.direct-chat-text {
-        background: #5EA5CF;
-        border-color: #5EA5CF;
-        color: #fff;
-        text-align: right;
-        float: right;
-        width: 80%;
-        max-width: 800px;
-    }    
-    .direct-chat-text {
-        max-width: 800px;
-    }    
-     .skin-blue-light .sidebar-menu > li > .treeview-menu {
-    background: none;
-    }
-    .conversation-list-li {
-           height: 70px;
-               padding-top: 6px;
-               border-bottom: 1px solid #f1f1f1;
-
-    } 
-    .conversation-list-li:hover {
-            background-color:#75D26B;
+        .direct-chat-warning .right>.direct-chat-text {
+            background: #5EA5CF;
+            border-color: #5EA5CF;
             color: #fff;
-            
-    }    
-
-    .conversation-list-active{
+            text-align: right;
+            float: right;
+            width: 80%;
+            max-width: 800px;
+        }
+        
+        .direct-chat-text {
+            max-width: 800px;
+        }
+        
+        .skin-blue-light .sidebar-menu>li>.treeview-menu {
+            background: none;
+        }
+        
+        .conversation-list-li {
+            height: 70px;
+            padding-top: 6px;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        
+        .conversation-list-li:hover {
+            background-color: #75D26B;
+            color: #fff;
+        }
+        
+        .conversation-list-active {
             background-color: #4CB741;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             border-bottom: 0px solid #f1f1f1;
-    }
-    .skin-blue-light .treeview-menu > li > a:hover {
-        color: #fff;
-    }
-    .treeview-menu li.conversation-list-active > a{
-        color: #fff;
-    }
+        }
         
-    .direct-chat-img-message{
-    box-shadow: 3px 5px 20px #777;
-    -moz-box-shadow: 3px 5px 20px #777;
-    -webkit-box-shadow: 3px 5px 20px #777;
-    -khtml-box-shadow: 3px 5px 20px #777;
-    border:1px solid #fff;
-    }  
+        .skin-blue-light .treeview-menu>li>a:hover {
+            color: #fff;
+        }
         
-    .box-header.with-border {
-        border-bottom: 2px solid #f4f4f4;
-        box-shadow: 2px 4px 20px #777;
-    -moz-box-shadow: 2px 4px 20px #777;
-    -webkit-box-shadow: 2px 4px 20px #777;
-    -khtml-box-shadow: 2px 4px 20px #777;
-    }
+        .treeview-menu li.conversation-list-active>a {
+            color: #fff;
+        }
         
-    .box-header>.fa, .box-header>.glyphicon, .box-header>.ion, .box-header .box-title {
-        display: inline-block;
-        font-size: 28px;
-        margin: 0;
-        line-height: 1;
-        font-weight: 800;
-    }
+        .direct-chat-img-message {
+            box-shadow: 3px 5px 20px #777;
+            -moz-box-shadow: 3px 5px 20px #777;
+            -webkit-box-shadow: 3px 5px 20px #777;
+            -khtml-box-shadow: 3px 5px 20px #777;
+            border: 1px solid #fff;
+        }
         
-</style>
+        .box-header.with-border {
+            border-bottom: 2px solid #f4f4f4;
+            box-shadow: 2px 4px 20px #777;
+            -moz-box-shadow: 2px 4px 20px #777;
+            -webkit-box-shadow: 2px 4px 20px #777;
+            -khtml-box-shadow: 2px 4px 20px #777;
+        }
+        
+        .box-header>.fa,
+        .box-header>.glyphicon,
+        .box-header>.ion,
+        .box-header .box-title {
+            display: inline-block;
+            font-size: 28px;
+            margin: 0;
+            line-height: 1;
+            font-weight: 800;
+        }
+    </style>
 </head>
 
 <body class="hold-transition skin-blue-light sidebar-mini">
@@ -97,7 +104,7 @@
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>DCX</b></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg" style="background-color: #fff;"><img src="images/DCXLogo.jpg" border="0"></span>
+                <span class="logo-lg" style="background-color: #fff;"><img src="Images/DCXLogo.jpg" border="0"></span>
             </a>
 
             <!-- Header Navbar: style can be found in header.less -->
@@ -195,7 +202,7 @@
                         <div class="box box-warning direct-chat direct-chat-warning" style="border-top-color:#bbd9e9; ">
                             <div class="box-header with-border">
                                 <h1 class="box-title" id="conversation-title"></h1>
-                                 <br><small id="participants-list" style="overflow: hidden"></small>
+                                <br><small id="participants-list" style="overflow: hidden"></small>
                                 <!--<div class="box-tools pull-right">
                                     <span data-toggle="tooltip" title="3 New Messages" class="badge bg-yellow">3</span>
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -530,7 +537,7 @@
     </div>
     <!-- ./wrapper -->
 
-      <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
 
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="dist/js/app.min.js"></script>
@@ -621,11 +628,11 @@
                     var convImg;
                     var convSubject;
                     if ((element.flags & 16) === 16) {
-                        convImg = "https://scp.pfortner.co.za/media/avatar/"+Object.keys(element.users)+"/48x48";
-                        convSubject=element.users[Object.keys(element.users)];
+                        convImg = "https://scp.pfortner.co.za/media/avatar/" + Object.keys(element.users) + "/48x48";
+                        convSubject = element.users[Object.keys(element.users)];
                     } else {
                         convImg = "https://scp.pfortner.co.za/assets/defaults/group.png";
-                        convSubject=element.subject;
+                        convSubject = element.subject;
                     }
 
                     // href.innerHTML
@@ -643,7 +650,7 @@
                     convDivTxt.setAttribute("style", "vertical-align: middle;display: inline-block; font-size: medium;");
                     convDiv.appendChild(convDivTxt);
 
-                    convDivTxt.innerHTML=convSubject+"<span style='display: block;color: #ccc; font-size: 11px;'>Button alt</span>"
+                    convDivTxt.innerHTML = convSubject + "<span style='display: block;color: #ccc; font-size: 11px;'>Button alt</span>"
 
 
                     href.onclick = function() {
@@ -710,8 +717,8 @@
                     };
 
                     chatName = document.createElement("span");
-                    chatName.setAttribute("class", "direct-chat-name "+ (((user.flags & 1) === 1) ? "pull-right" : ""));
-                    chatName.innerHTML = user.name+"<br><span class='direct-chat-timestamp'>"+new Date(message.created * 1000).toLocaleDateString("en-ZA", options)+"</span>";
+                    chatName.setAttribute("class", "direct-chat-name " + (((user.flags & 1) === 1) ? "pull-right" : ""));
+                    chatName.innerHTML = user.name + "<br><span class='direct-chat-timestamp'>" + new Date(message.created * 1000).toLocaleDateString("en-ZA", options) + "</span>";
                     chatInfo.appendChild(chatName);
 
 
@@ -725,7 +732,7 @@
 
                 chatText = document.createElement("div");
                 chatText.setAttribute("class", "direct-chat-text");
-                
+
                 if (message.type === "text") {
                     chatText.innerHTML = message.text;
                 }

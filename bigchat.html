@@ -8,7 +8,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/AdminLTE.css">
     <link rel="stylesheet" href="dist/css/skins/skin-blue-light.css">
     <link rel="stylesheet" href="plugins/pace/pace.min.css">
 
@@ -162,13 +162,11 @@
           }
         }
         .main-header .navbar {
-
-  margin-left: 330px;
-
-}
-.layout-top-nav .main-header .navbar {
-  margin-left: 0;
-}
+            margin-left: 330px;
+        }
+        .layout-top-nav .main-header .navbar {
+          margin-left: 0;
+        }
         
         @media (max-width: 767px) {
           .main-sidebar,
@@ -224,6 +222,15 @@
             right: 40px;
           }
         }
+        .content{
+            padding-top: 0px;
+        }
+        @media (max-width: 767px) {
+          .main-sidebar,
+          .left-side {
+            padding-top: 50px;
+          }
+        }
             </style>
 </head>
 
@@ -231,7 +238,7 @@
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="index2.html" class="logo" style="background-color: #fff;">
+            <a href="index2.html" class="logo hidden-xs" style="background-color: #fff;">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>DCX</b></span>
                 <!-- logo for regular state and mobile devices -->
@@ -243,9 +250,10 @@
                 <!-- Sidebar toggle button-->
                 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                     <span class="sr-only">Toggle navigation</span>
-                </a>
+                </a><span class="box-title" id="conversation-title-bar" style="font-size:18px; color: #fff;padding-top: 15px;padding-left: 10px;    display: inline-block;"></span>
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
+                    
                     <ul class="nav navbar-nav">
                         <!--User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
@@ -331,7 +339,7 @@
 
                         <!-- DIRECT CHAT -->
                         <div class="box box-warning direct-chat direct-chat-warning" style="border-top-color:#bbd9e9; ">
-                            <div class="box-header with-border">
+                            <div class="box-header with-border hidden-xs">
                                 <h1 class="box-title" id="conversation-title"></h1>
                                 <br><small id="participants-list" style="overflow: hidden"></small>
                                 <!--<div class="box-tools pull-right">
@@ -710,7 +718,7 @@
                     convDiv.appendChild(convDivTxt);
 
                     
-                    convDivTxt.innerHTML=convSubject+"<span style='display: block;color: #444; font-size: 12px;white-space:pre-line; width:230px;'>"+element.value+"</span>"
+                    convDivTxt.innerHTML=convSubject+"<span style='display: block;color: #444; font-size: 12px; white-space:pre-line; width:230px; word-break: break-all;'>"+element.value+"</span>"
 
 
                     href.onclick = function() {
@@ -722,6 +730,11 @@
                         li.setAttribute("class", "conversation-list-li conversation-list-active");
                         populateMessages(element);
                         conversationId = element.id;
+
+                        if (window.outerWidth <767){
+                            $('body').removeClass("sidebar-open");
+                            $('body').addClass("sidebar-collapse");
+                        }
                     }
                 }, this);
 
@@ -743,8 +756,10 @@
             // Set Conversation Title
             if ((conversation.flags & 16) === 16) {
                 document.getElementById("conversation-title").innerHTML = "Direct Chat";
+                document.getElementById("conversation-title-bar").innerHTML = "Direct Chat";
             } else {
                 document.getElementById("conversation-title").innerHTML = conversation.subject;
+                document.getElementById("conversation-title-bar").innerHTML = conversation.subject;
             }
 
             // Set Participants
@@ -798,7 +813,7 @@
 
                 chatText = document.createElement("div");
                 chatText.setAttribute("class", "direct-chat-text");
-
+                chatText.setAttribute("style", "white-space:pre-line; word-break: break-all;");
                 if (message.type === "text") {
                     chatText.innerHTML = message.text.linkify();
                 }
@@ -934,9 +949,8 @@
             String.prototype.linkify = function() {
 
                 // http://, https://, ftp://
-                var urlPattern =  /^(?:(?:ht|f)tp(?:s?)\:\/\/|~\/|\/)?(?:\w+:\w+@)?((?:(?:[-\w\d{1-3}]+\.)+(?:com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|edu|co\.uk|ac\.uk|it|fr|tv|museum|asia|local|travel|[a-z]{2}))|((\b25[0-5]\b|\b[2][0-4][0-9]\b|\b[0-1]?[0-9]?[0-9]\b)(\.(\b25[0-5]\b|\b[2][0-4][0-9]\b|\b[0-1]?[0-9]?[0-9]\b)){3}))(?::[\d]{1,5})?(?:(?:(?:\/(?:[-\w~!$+|.,=]|%[a-f\d]{2})+)+|\/)+|\?|#)?(?:(?:\?(?:[-\w~!$+|.,*:]|%[a-f\d{2}])+=?(?:[-\w~!$+|.,*:=]|%[a-f\d]{2})*)(?:&(?:[-\w~!$+|.,*:]|%[a-f\d{2}])+=?(?:[-\w~!$+|.,*:=]|%[a-f\d]{2})*)*)*(?:#(?:[-\w~!$ |\/.,*:;=]|%[a-f\d]{2})*)?$/i;
 
-
+                var urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
 
                 // www. sans http:// or https://
                 var pseudoUrlPattern = /(^|[^\/])(www\.[\S]+(\b|$))/gim;

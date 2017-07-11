@@ -93,7 +93,118 @@
             line-height: 1;
             font-weight: 800;
         }
-    </style>
+        /*left sidebar width*/
+        .main-sidebar, .left-side {
+
+            width: 330px;
+        }
+        .main-header .logo {
+
+            width: 330px;
+        }
+        .content-wrapper,
+        .right-side,
+        .main-footer {
+          -webkit-transition: -webkit-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+          -moz-transition: -moz-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+          -o-transition: -o-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+          transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+          margin-left: 330px;
+          z-index: 820;
+        }
+        .layout-top-nav .content-wrapper,
+        .layout-top-nav .right-side,
+        .layout-top-nav .main-footer {
+          margin-left: 0;
+        }
+        @media (max-width: 767px) {
+          .content-wrapper,
+          .right-side,
+          .main-footer {
+            margin-left: 0;
+          }
+        }
+        @media (min-width: 768px) {
+          .sidebar-collapse .content-wrapper,
+          .sidebar-collapse .right-side,
+          .sidebar-collapse .main-footer {
+            margin-left: 0;
+          }
+        }
+        @media (max-width: 767px) {
+          .sidebar-open .content-wrapper,
+          .sidebar-open .right-side,
+          .sidebar-open .main-footer {
+            -webkit-transform: translate(330px, 0);
+            -ms-transform: translate(330px, 0);
+            -o-transform: translate(330px, 0);
+            transform: translate(330px, 0);
+          }
+        }
+        .main-header .navbar {
+
+  margin-left: 330px;
+
+}
+.layout-top-nav .main-header .navbar {
+  margin-left: 0;
+}
+        
+        @media (max-width: 767px) {
+          .main-sidebar,
+          .left-side {
+            -webkit-transform: translate(-330px, 0);
+            -ms-transform: translate(-330px, 0);
+            -o-transform: translate(-330px, 0);
+            transform: translate(-330px, 0);
+          }
+        }
+        @media (min-width: 768px) {
+          .sidebar-collapse .main-sidebar,
+          .sidebar-collapse .left-side {
+            -webkit-transform: translate(-330px, 0);
+            -ms-transform: translate(-330px, 0);
+            -o-transform: translate(-330px, 0);
+            transform: translate(-330px, 0);
+          }
+        }
+        .control-sidebar-bg,
+        .control-sidebar {
+          top: 0;
+          right: -330px;
+          width: 330px;
+          -webkit-transition: right 0.3s ease-in-out;
+          -o-transition: right 0.3s ease-in-out;
+          transition: right 0.3s ease-in-out;
+        }
+        @media (max-width: 767px) {
+          .main-header {
+            position: relative;
+          }
+          .main-header .logo,
+          .main-header .navbar {
+            width: 100%;
+            float: none;
+          }
+          .main-header .navbar {
+            margin: 0;
+          }
+          .main-header .navbar-custom-menu {
+            float: right;
+          }
+        }
+        @media (max-width: 991px) {
+          .navbar-collapse.pull-left {
+            float: none !important;
+          }
+          .navbar-collapse.pull-left + .navbar-custom-menu {
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 40px;
+          }
+        }
+            </style>
 </head>
 
 <body class="hold-transition skin-blue-light sidebar-mini">
@@ -139,7 +250,7 @@
                                         <!--<a href="#" class="btn btn-default btn-flat">Profile</a>-->
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="#" class="btn btn-default btn-flat" id="sign-out">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -174,7 +285,7 @@
                             <span>CONVERSATIONS</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
-                        <ul class="treeview-menu" id="conversation-container">
+                        <ul class="treeview-menu" id="conversation-container" style="overflow: auto;">
                         </ul>
                     </li>
                 </ul>
@@ -215,105 +326,10 @@
                                 <!-- Conversations are loaded here -->
                                 <div class="direct-chat-messages" id="message-container">
                                 </div>
-                                <!--/.direct-chat-messages-->
 
-                                <!-- Contacts are loaded here -->
-                                <div class="direct-chat-contacts">
-                                    <ul class="contacts-list">
-                                        <li>
-                                            <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user1-128x128.jpg" alt="User Image">
-
-                                                <div class="contacts-list-info">
-                                                    <span class="contacts-list-name">
-                                  Count Dracula
-                                  <small class="contacts-list-date pull-right">2/28/2015</small>
-                                </span>
-                                                    <span class="contacts-list-msg">How have you been? I was...</span>
-                                                </div>
-                                                <!-- /.contacts-list-info -->
-                                            </a>
-                                        </li>
-                                        <!-- End Contact Item -->
-                                        <li>
-                                            <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user7-128x128.jpg" alt="User Image">
-
-                                                <div class="contacts-list-info">
-                                                    <span class="contacts-list-name">
-                                  Sarah Doe
-                                  <small class="contacts-list-date pull-right">2/23/2015</small>
-                                </span>
-                                                    <span class="contacts-list-msg">I will be waiting for...</span>
-                                                </div>
-                                                <!-- /.contacts-list-info -->
-                                            </a>
-                                        </li>
-                                        <!-- End Contact Item -->
-                                        <li>
-                                            <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user3-128x128.jpg" alt="User Image">
-
-                                                <div class="contacts-list-info">
-                                                    <span class="contacts-list-name">
-                                  Nadia Jolie
-                                  <small class="contacts-list-date pull-right">2/20/2015</small>
-                                </span>
-                                                    <span class="contacts-list-msg">I'll call you back at...</span>
-                                                </div>
-                                                <!-- /.contacts-list-info -->
-                                            </a>
-                                        </li>
-                                        <!-- End Contact Item -->
-                                        <li>
-                                            <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user5-128x128.jpg" alt="User Image">
-
-                                                <div class="contacts-list-info">
-                                                    <span class="contacts-list-name">
-                                  Nora S. Vans
-                                  <small class="contacts-list-date pull-right">2/10/2015</small>
-                                </span>
-                                                    <span class="contacts-list-msg">Where is your new...</span>
-                                                </div>
-                                                <!-- /.contacts-list-info -->
-                                            </a>
-                                        </li>
-                                        <!-- End Contact Item -->
-                                        <li>
-                                            <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user6-128x128.jpg" alt="User Image">
-
-                                                <div class="contacts-list-info">
-                                                    <span class="contacts-list-name">
-                                  John K.
-                                  <small class="contacts-list-date pull-right">1/27/2015</small>
-                                </span>
-                                                    <span class="contacts-list-msg">Can I take a look at...</span>
-                                                </div>
-                                                <!-- /.contacts-list-info -->
-                                            </a>
-                                        </li>
-                                        <!-- End Contact Item -->
-                                        <li>
-                                            <a href="#">
-                                                <img class="contacts-list-img" src="dist/img/user8-128x128.jpg" alt="User Image">
-
-                                                <div class="contacts-list-info">
-                                                    <span class="contacts-list-name">
-                                  Kenneth M.
-                                  <small class="contacts-list-date pull-right">1/4/2015</small>
-                                </span>
-                                                    <span class="contacts-list-msg">Never mind I found...</span>
-                                                </div>
-                                                <!-- /.contacts-list-info -->
-                                            </a>
-                                        </li>
-                                        <!-- End Contact Item -->
-                                    </ul>
-                                    <!-- /.contatcts-list -->
-                                </div>
-                                <!-- /.direct-chat-pane -->
+                            </div>
+                            <div class="overlay" id="message-loading-overlay">
+                              <i class="fa fa-refresh fa-spin" id="message-loading-spinner"></i>
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
@@ -335,13 +351,6 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-
-        <!--<footer class="main-footer">
-            <div class="pull-right hidden-xs">
-                <b>Version</b> 2.3.8
-            </div>
-            <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
-        </footer>-->
 
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
@@ -536,6 +545,16 @@
         <div class="control-sidebar-bg"></div>
     </div>
     <!-- ./wrapper -->
+    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" data-dismiss="modal">
+            <div class="modal-content"  >              
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <img src="" id="idimagepreview"  class="imagepreview img-responsive" >
+                </div>         
+            </div>
+        </div>
+    </div>
 
     <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
 
@@ -558,6 +577,15 @@
             ) + "px";
 
             var element = document.getElementById("message-container");
+
+            /*Side bar dynamic height for scroll*/
+            document.getElementsByClassName("treeview-menu")[0].style.height = (
+                window.innerHeight-
+                document.getElementsByClassName("main-header")[0].clientHeight -
+                document.getElementsByClassName("sidebar-form")[0].clientHeight -80
+                
+            ) + "px";
+
             element.scrollTop = element.scrollHeight - element.clientHeight;
         }
 
@@ -586,17 +614,28 @@
                 Pace.restart();
             });
             var xmlHttp = new XMLHttpRequest();
-            xmlHttp.open("post", "https://" + DOMAIN + "/request/api/" + api, true);
-            xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8 ");
-            xmlHttp.withCredentials = true;
-            xmlHttp.send(data);
-            xmlHttp.onreadystatechange = function(e) {
-                if (xmlHttp.readyState === 4) {
-                    if (xmlHttp.status === 200) {
-                        callback(xmlHttp.responseText);
+            try{
+                xmlHttp.open("post", "https://" + DOMAIN + "/request/api/" + api, true);
+                xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8 ");
+                xmlHttp.withCredentials = true;
+                xmlHttp.onreadystatechange = function(e) {
+                    if (xmlHttp.readyState === 4) {
+                        if (xmlHttp.status === 200) {
+                            clearTimeout(xmlHttpTimeout); 
+                            callback(xmlHttp.responseText);
+                        }
                     }
+                };
+                xmlHttp.send(data);
+                var xmlHttpTimeout=setTimeout(ajaxTimeout,10000);
+                function ajaxTimeout(){
+                   xmlHttp.abort();
+                   alert("Request timed out");
                 }
-            };
+             } catch (e) {
+                        alert("There was a problem connecting to the server. Please try again later");
+                        console.error(e);
+                }
         }
 
         function populateDetails() {
@@ -650,7 +689,8 @@
                     convDivTxt.setAttribute("style", "vertical-align: middle;display: inline-block; font-size: medium;");
                     convDiv.appendChild(convDivTxt);
 
-                    convDivTxt.innerHTML = convSubject + "<span style='display: block;color: #ccc; font-size: 11px;'>Button alt</span>"
+                    
+                    convDivTxt.innerHTML=convSubject+"<span style='display: block;color: #444; font-size: 12px;white-space:pre-line; width:230px;'>"+element.value+"</span>"
 
 
                     href.onclick = function() {
@@ -674,6 +714,12 @@
 
 
         function renderMessages(conversation, messagesResponse) {
+            // set overlay
+            var messageovelay = document.getElementById("message-loading-overlay");
+            messageovelay.setAttribute("class", "overlay");
+            var messagespinner = document.getElementById("message-loading-spinner");
+            messagespinner.setAttribute("class", "fa fa-refresh fa-spin");
+
             // Set Conversation Title
             if ((conversation.flags & 16) === 16) {
                 document.getElementById("conversation-title").innerHTML = "Direct Chat";
@@ -738,14 +784,29 @@
                 }
 
                 if (message.type === "file") {
+
+
                     var image = document.createElement("img");
                     image.setAttribute("class", "img-responsive");
+                    image.setAttribute("id", "imgid-"+message.id);
+                    image.setAttribute("style", "cursor: pointer;");
                     image.src = message.text.split("|")[1];
                     image.src = "https://scp.pfortner.co.za/request/api/conversation/attachment?id=" + conversation.id + "&mi=" + message.id + "&op=1";
+                    
+
                     chatText.appendChild(image);
                     chatText.style.minHeight = "100px";
                     chatText.innerHTML += "<br />" + message.text.split("|")[1];
                     chatText.innerHTML += "<br />" + message.text.split("|")[0];
+                    //Modal Image
+                    chatText.onclick = function() {
+                        //alert(image.src);
+                        mymodalimg = document.getElementById("idimagepreview");
+                        mymodalimg.setAttribute("src","https://scp.pfortner.co.za/request/api/conversation/attachment?id=" + conversation.id + "&mi=" + message.id);
+                        mymodalimgdescrip = document.getElementById("imagedescrip");
+                        mymodalimg.setAttribute("style", "max-height:"+(window.innerHeight-80)+"px;");
+			            $('#imagemodal').modal('show'); 
+                    }
                 }
 
                 if (message.type === "audr") {
@@ -776,7 +837,13 @@
                 }
 
                 chatContainer.appendChild(chatText);
+                
+                
             });
+
+            // Clear overlay
+            messageovelay.setAttribute("class", "");
+            messagespinner.setAttribute("class", "");
 
             var element = document.getElementById("message-container");
             element.scrollTop = element.scrollHeight - element.clientHeight;
@@ -826,16 +893,24 @@
             }
         }
 
-        // Initial session/access call
         scpAPICall("session/access", function(response) {
             if (response > 0) {
                 populateDetails();
                 populateConversations();
                 initializeClickHandlers();
             } else {
-                window.location = "/";
+                window.location = "/index.html";
             }
         });
+
+        // Logout       
+            document.getElementById("sign-out").onclick = function () {
+                scpAPICall("session/logout", function(response) {});
+                window.location = "/index.html";
+            };
+        
+
+
     </script>
 </body>
 

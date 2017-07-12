@@ -184,7 +184,7 @@
                             <form class="login-form" action="javascript:void(0);">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input type="email" class="form-control" id="login-name" placeholder="Type your username / email">
+                                        <input type="text" class="form-control" id="login-name" placeholder="Type your username / email">
                                         <span class="input-group-addon">
                                               <i class="glyphicon glyphicon-user"></i>
                                           </span>
@@ -222,36 +222,73 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="dist/js/app.min.js"></script>
     <script src="dist/js/pace.js"></script>
-    <script type="text/javascript">
-        var DOMAIN = "scp.pfortner.co.za";
-        var xmlHttp = new XMLHttpRequest();
+            <script  type="text/javascript">
 
-        document.getElementById("login-button").onclick = function() {
+        var DOMAIN = "scp.pfortner.co.za";
+
+        // Globals
+        var MSCT = 0;
+        var pollTimer = 0;
+        var conversationId = 0;
+
+        function scpAPICall(api, callback, data = null) {
             $(document).ajaxStart(function() {
                 Pace.restart();
             });
-
-            if (document.getElementById("login-name").value != "" && document.getElementById("login-password").value != "") {
-                try {
-                    xmlHttp.open("POST", "https://" + DOMAIN + "/request/api/session/login", false);
-                    xmlHttp.withCredentials = true;
-                    xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-                    xmlHttp.send(encodeURI("username=" + document.getElementById("login-name").value + "&password=" + document.getElementById("login-password").value));
-                    if (xmlHttp.responseText == "LOGIN_SUCCESS") {
-                        window.location = "/bigchat.html";
-                    } else {
-                        //console.error(xmlHttp.responseText);
-                        alert("There was a problem with your credentials. Please correct and try again.");
+            var xmlHttp = new XMLHttpRequest();
+            try{
+                xmlHttp.open("post", "https://" + DOMAIN + "/request/api/" + api, true);
+                xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8 ");
+                xmlHttp.withCredentials = true;
+                xmlHttp.onreadystatechange = function(e) {
+                    if (xmlHttp.readyState === 4) {
+                        if (xmlHttp.status === 200) {
+                            clearTimeout(xmlHttpTimeout); 
+                            callback(xmlHttp.responseText);
+                        }
                     }
-                } catch (e) {
-                    alert("There was a problem connecting to the server. Please try again later");
-                    console.error(e);
+                };
+                xmlHttp.send(data);
+                var xmlHttpTimeout=setTimeout(ajaxTimeout,10000);
+                function ajaxTimeout(){
+                   xmlHttp.abort();
+                   alert("Request timed out");
                 }
-            } else {
-                alert("Please complete both fields to log in.")
+             } catch (e) {
+                        alert("There was a problem connecting to the server. Please try again later");
+                        console.error(e);
+                }
+        }
+
+            document.getElementById("login-button").onclick = function () {
+                $(document).ajaxStart(function () {
+                    Pace.restart();
+                });
+
+                if (document.getElementById("login-name").value != "" && document.getElementById("login-password").value != "") {
+                    
+                    scpAPICall("session/login", function(response) {
+                        if (response == "LOGIN_SUCCESS") {
+                            window.location = "/bigchat.html";
+                        } else {
+                            //console.error(xmlHttp.responseText);
+                            alert("There was a problem with your credentials. Please correct and try again.");
+                        }
+                    },encodeURI("username=" + document.getElementById("login-name").value + "&password=" + document.getElementById("login-password").value));
+
+                } else {
+                    alert("Please complete both fields to log in.")
+                }
+            };
+
+
+            scpAPICall("session/access", function(response) {
+            if (response > 0) {
+                window.location = "/bigchat.html";
             }
-        };
-    </script>
+        });
+        </script>
+
 </body>
 
 </html>

@@ -24,16 +24,40 @@
             border-left-color: #5EA5CF;
         }
         
+        .direct-chat-warning .rightrepeat>.direct-chat-text:after,
+        .direct-chat-warning .rightrepeat>.direct-chat-text:before {
+                border: none transparent;
+        }        
+        
+        .direct-chat-warning .leftrepeat>.direct-chat-text:after,
+        .direct-chat-warning .leftrepeat>.direct-chat-text:before {
+                border: none transparent;
+        }    
+        
         .direct-chat-warning .right>.direct-chat-text {
             background: #5EA5CF;
             border-color: #5EA5CF;
             color: #fff;
             text-align: right;
             float: right;
-            width: 80%;
+            width: 74%;
             max-width: 800px;
         }
-        
+        .direct-chat-warning .rightrepeat>.direct-chat-text {
+            background: #5EA5CF;
+            border-color: #5EA5CF;
+            color: #fff;
+            text-align: right;
+            float: right;
+            width: 74%;
+            max-width: 800px;
+            margin-right: 40px;
+            margin-left: 0;
+        }        
+        .right .direct-chat-text {
+            margin-right: 10px;
+            margin-left: 0;
+        }
         .direct-chat-warning .right>.direct-chat-text> a , a:active{
                 color: #d8d8d8;
                 text-decoration-line: underline;
@@ -43,7 +67,15 @@
                 color: #fff;
                 text-decoration-line: underline;
         }
+        .direct-chat-warning .rightrepeat>.direct-chat-text> a , a:active{
+                color: #d8d8d8;
+                text-decoration-line: underline;
+        }
         
+        .direct-chat-warning .rightrepeat>.direct-chat-text> a:hover {
+                color: #fff;
+                text-decoration-line: underline;
+        }
         .direct-chat-msg>.direct-chat-text> a , a:active{
                 color: #3c8dbc;
                 text-decoration-line: underline;
@@ -53,7 +85,9 @@
                 color: #fff;
                 text-decoration-line: underline;
         }
-        
+        .direct-chat-msg{
+            margin-bottom: 0px;
+        }
         .direct-chat-text {
             max-width: 800px;
         }
@@ -93,6 +127,13 @@
             -webkit-box-shadow: 3px 5px 20px #777;
             -khtml-box-shadow: 3px 5px 20px #777;
             border: 1px solid #fff;
+        }
+        
+        .direct-chat-img {
+            border-radius: 50%;
+            float: left;
+            width: 30px;
+            height: 30px;
         }
         
         .box-header.with-border {
@@ -224,11 +265,17 @@
         }
         .content{
             padding-top: 0px;
+            padding-bottom: 0px;
         }
         @media (max-width: 767px) {
           .main-sidebar,
           .left-side {
             padding-top: 50px;
+          }
+        }
+        @media (max-width: 768px) {
+          .control-sidebar {
+            padding-top: 20px;
           }
         }
             </style>
@@ -420,7 +467,7 @@
                 window.innerHeight -
                 document.getElementsByClassName("main-header")[0].clientHeight -
                // document.getElementsByClassName("box-header")[0].clientHeight -
-                document.getElementsByClassName("box-footer")[0].clientHeight - 30
+                document.getElementsByClassName("box-footer")[0].clientHeight - 6
             ) + "px";
 
             var element = document.getElementById("message-container");
@@ -632,13 +679,30 @@
                 resize();
             }, "id=" + conversation.id);
 
+            var repeatuserid =0;
             messagesResponse.items.reverse().forEach(function(message) {
                 var user = messagesResponse.users.find(function(user) {
                     return user.id === message.user_id;
                 });
 
+                var pushclass="";
+
+                if (user.flags ==1){
+                    if (message.user_id != repeatuserid) {
+                        pushclass=" right" 
+                    }else{
+                        pushclass=" rightrepeat"                    
+                    }
+                }else{
+                    if (message.user_id != repeatuserid) {
+                        pushclass="" 
+                    }else{
+                        pushclass=" leftrepeat"                    
+                    }
+                }
+                
                 chatContainer = document.createElement("div");
-                chatContainer.setAttribute("class", "direct-chat-msg" + (((user.flags & 1) === 1) ? " right" : ""));
+                chatContainer.setAttribute("class", "direct-chat-msg" + pushclass);
                 document.getElementById("message-container").appendChild(chatContainer);
 
                 if (message.type != "addu" && message.type != "addg") {
@@ -655,18 +719,20 @@
                         minute: "2-digit"
                     };
 
-                    chatName = document.createElement("span");
-                    chatName.setAttribute("class", "direct-chat-name " + (((user.flags & 1) === 1) ? "pull-right" : ""));
-                    chatName.innerHTML = user.name + "<br><span class='direct-chat-timestamp'>" + new Date(message.created * 1000).toLocaleDateString("en-ZA", options) + "</span>";
-                    chatInfo.appendChild(chatName);
+                    if (message.user_id != repeatuserid) {
+                        chatName = document.createElement("span");
+                        chatName.setAttribute("class", "direct-chat-name " + (((user.flags & 1) === 1) ? "pull-right" : ""));
+                        chatName.innerHTML = user.name + "<br><span class='direct-chat-timestamp'>" + new Date(message.created * 1000).toLocaleDateString("en-ZA", options) + "</span>";
+                        chatInfo.appendChild(chatName);
 
+                        chatAvatar = document.createElement("img");
+                        chatAvatar.setAttribute("class", "direct-chat-img direct-chat-img-message");
+                        chatAvatar.setAttribute("src", "https://scp.pfortner.co.za/media/avatar/" + message.user_id + "/30x30");
+                        chatAvatar.innerHTML = message.created;
+                        chatContainer.appendChild(chatAvatar);
 
-
-                    chatAvatar = document.createElement("img");
-                    chatAvatar.setAttribute("class", "direct-chat-img direct-chat-img-message");
-                    chatAvatar.setAttribute("src", "https://scp.pfortner.co.za/media/avatar/" + message.user_id + "/40x40");
-                    chatAvatar.innerHTML = message.created;
-                    chatContainer.appendChild(chatAvatar);
+                        repeatuserid=message.user_id;
+                    }
                 }
 
                 chatText = document.createElement("div");
@@ -677,10 +743,8 @@
                 }
 
                 if (message.type === "file") {
-
-
                     var image = document.createElement("img");
-                    image.setAttribute("class", "img-responsive");
+
                     image.setAttribute("id", "imgid-"+message.id);
                     image.setAttribute("style", "cursor: pointer;");
                     image.src = message.text.split("|")[1];
@@ -691,23 +755,41 @@
                     chatText.style.minHeight = "100px";
                     chatText.innerHTML += "<br />" + message.text.split("|")[1];
                     chatText.innerHTML += "<br />" + message.text.split("|")[0];
-                    //Modal Image
-                    chatText.onclick = function() {
-                        //alert(image.src);
-                        mymodalimg = document.getElementById("idimagepreview");
-                        mymodalimg.setAttribute("src","https://scp.pfortner.co.za/request/api/conversation/attachment?id=" + conversation.id + "&mi=" + message.id);
-                        mymodalimgdescrip = document.getElementById("imagedescrip");
-                        mymodalimg.setAttribute("style", "max-height:"+(window.innerHeight-80)+"px;");
-			            $('#imagemodal').modal('show'); 
-                    }
+                    var filetype = message.text.split("|")[1].split('.').pop();
+                    switch( filetype.toLowerCase() ) {
+                        case "jpg": case "png": case "jpeg":
+
+                            //Modal Image
+                            chatText.onclick = function() {
+                                //alert(image.src);
+                                mymodalimg = document.getElementById("idimagepreview");
+                                mymodalimg.setAttribute("src","https://scp.pfortner.co.za/request/api/conversation/attachment?id=" + conversation.id + "&mi=" + message.id);
+                                mymodalimgdescrip = document.getElementById("imagedescrip");
+                                mymodalimg.setAttribute("style", "max-height:"+(window.innerHeight-80)+"px;");
+			                    $('#imagemodal').modal('show'); 
+                            }
+                          break;
+                        case "mov":
+                         
+                          break;
+                        case "mp3": case "wav": 
+                          
+                          break;
+                        default:
+                            //Download file
+                            chatText.onclick = function() {
+                                window.location = "https://scp.pfortner.co.za/request/api/conversation/attachment?id="+conversation.id+"&mi="+message.id;
+                            }
+                      } 
                 }
+                
 
                 if (message.type === "audr") {
                     if (message.text.split("|")[1]) {
                         chatText.innerHTML = "<img src='https://scp.pfortner.co.za/assets/icons/phone.png' style='width: 20px'/> " + user.name + " established a call with " + message.text.split("|")[2];
 
                         chatText.innerHTML += `<br/><br />
-								<audio controls>
+								<audio controls style="width: 250px">
 									<source src="` + "https://scp.pfortner.co.za/media/recording/" + message.text.split("|")[1] + `" type="audio/mp3">
 								</audio>
 							`;

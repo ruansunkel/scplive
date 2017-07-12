@@ -592,7 +592,7 @@
                     convDiv.appendChild(convDivTxt);
 
                     
-                    convDivTxt.innerHTML=convSubject+"<span style='display: block;color: #444; font-size: 12px; white-space:pre-line; width:230px; word-break: break-word;'>"+element.value.substring(0,80)+"</span>"
+                    convDivTxt.innerHTML=convSubject+"<span style='display: block;color: #444; font-size: 12px; white-space:pre-line; width:230px; word-break: break-word;'>"+element.value.substring(0,70)+"</span>"
 
 
                     href.onclick = function() {
@@ -769,16 +769,25 @@
 			                    $('#imagemodal').modal('show'); 
                             }
                           break;
-                        case "mov":
-                         
+                        case "mov": case "mp4":
+                            chatText.innerHTML += `
+								<video  controls style="width: 250px" >
+									<source src="` + "https://scp.pfortner.co.za/request/api/conversation/attachment?id="+conversation.id+"&mi="+message.id + `" type="video/mp4">
+								</video>
+							`;
                           break;
                         case "mp3": case "wav": 
-                          
+                            chatText.innerHTML += `
+								<audio controls style="width: 250px">
+									<source src="` + "https://scp.pfortner.co.za/request/api/conversation/attachment?id="+conversation.id+"&mi="+message.id + `" >
+								</audio>
+							`;
                           break;
                         default:
                             //Download file
                             chatText.onclick = function() {
-                                window.location = "https://scp.pfortner.co.za/request/api/conversation/attachment?id="+conversation.id+"&mi="+message.id;
+                                window.open("https://scp.pfortner.co.za/request/api/conversation/attachment?id="+conversation.id+"&mi="+message.id, "_blank");
+                                //window.location.href = "https://scp.pfortner.co.za/request/api/conversation/attachment?id="+conversation.id+"&mi="+message.id;
                             }
                       } 
                 }

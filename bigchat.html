@@ -839,14 +839,14 @@
                             }
                           break;
                         case "mov": case "mp4":
-                            chatText.innerHTML += `
+                            chatText.innerHTML = `
 								<video  controls style="width: 250px" >
 									<source src="` + "https://scp.pfortner.co.za/request/api/conversation/attachment?id="+conversation.id+"&mi="+message.id + `" type="video/mp4">
 								</video>
 							`;
                           break;
                         case "mp3": case "wav": 
-                            chatText.innerHTML += `
+                            chatText.innerHTML = `
 								<audio controls style="width: 250px">
 									<source src="` + "https://scp.pfortner.co.za/request/api/conversation/attachment?id="+conversation.id+"&mi="+message.id + `" >
 								</audio>

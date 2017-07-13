@@ -87,11 +87,29 @@
         }
         .direct-chat-msg{
             margin-bottom: 0px;
+            margin-top: 10px;
+        }
+        .leftrepeat{
+            margin-top: 0px;
+        }
+        .rightrepeat{
+            margin-top: 0px;
         }
         .direct-chat-text {
             max-width: 800px;
         }
-        
+        .direct-chat-statusmessage{
+            text-align: center;
+            font-weight: 500;
+        }
+        .direct-chat-timestamp-left {
+            color: #eee;
+            padding-right: 5px;
+        }
+        .direct-chat-timestamp {
+            color: #999;
+            padding-left: 5px;
+        }
         .skin-blue-light .sidebar-menu>li>.treeview-menu {
             background: none;
         }
@@ -278,6 +296,41 @@
             padding-top: 20px;
           }
         }
+        
+        
+            .strike {
+                display: block;
+                text-align: center;
+                overflow: hidden;
+                white-space: nowrap; 
+                margin-top: 15px;
+                margin-bottom: 15px;
+            }
+
+            .strike > span {
+                position: relative;
+                display: inline-block;
+            }
+	
+            .strike > span:before,
+            .strike > span:after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                width: 9999px;
+                height: 1px;
+                background: #d2d6de;
+            }
+
+            .strike > span:before {
+                right: 100%;
+                margin-right: 15px;
+            }
+
+            .strike > span:after {
+                left: 100%;
+                margin-left: 15px;
+            }
             </style>
 </head>
 
@@ -370,8 +423,6 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-
-
             <!-- Main content -->
             <section class="content">
                 <div class="row">
@@ -680,20 +731,35 @@
             }, "id=" + conversation.id);
 
             var repeatuserid =0;
+            var MessageDateCheck="";
             messagesResponse.items.reverse().forEach(function(message) {
                 var user = messagesResponse.users.find(function(user) {
                     return user.id === message.user_id;
                 });
 
-                var pushclass="";
 
+                if (MessageDateCheck != strftime('%d %B %Y', new Date(message.created * 1000)) ){
+                    //Check date change and show date break line
+                     chatDateline = document.createElement("div");
+                    chatDateline.setAttribute("class", "strike");
+                    document.getElementById("message-container").appendChild(chatDateline);
+
+                    chatDateline.innerHTML="<span>" + strftime('%d %B %Y', new Date(message.created * 1000))  + "</span>"
+                    MessageDateCheck=strftime('%d %B %Y', new Date(message.created * 1000))
+                }
+
+                var pushclass="";
+                var timeposition="";
                 if (user.flags ==1){
+                    timeposition="direct-chat-timestamp-left pull-left";
                     if (message.user_id != repeatuserid) {
-                        pushclass=" right" 
+                        pushclass=" right"
+                        
                     }else{
                         pushclass=" rightrepeat"                    
                     }
                 }else{
+                    timeposition="direct-chat-timestamp pull-right";
                     if (message.user_id != repeatuserid) {
                         pushclass="" 
                     }else{
@@ -722,9 +788,9 @@
                     if (message.user_id != repeatuserid) {
                         chatName = document.createElement("span");
                         chatName.setAttribute("class", "direct-chat-name " + (((user.flags & 1) === 1) ? "pull-right" : ""));
-                        chatName.innerHTML = user.name + "<br><span class='direct-chat-timestamp'>" + new Date(message.created * 1000).toLocaleDateString("en-ZA", options) + "</span>";
+                        chatName.innerHTML = user.name;
                         chatInfo.appendChild(chatName);
-
+                        //new Date(message.created * 1000).toLocaleDateString("en-ZA", options)
                         chatAvatar = document.createElement("img");
                         chatAvatar.setAttribute("class", "direct-chat-img direct-chat-img-message");
                         chatAvatar.setAttribute("src", "https://scp.pfortner.co.za/media/avatar/" + message.user_id + "/30x30");
@@ -741,6 +807,9 @@
                 if (message.type === "text") {
                     chatText.innerHTML = message.text.linkify();
                 }
+
+                chatText.innerHTML +="<span class='direct-chat-timestamp "+timeposition+"'>" + strftime('%H:%M', new Date(message.created * 1000))  + "</span>"
+
 
                 if (message.type === "file") {
                     var image = document.createElement("img");
@@ -795,7 +864,7 @@
 
                 if (message.type === "audr") {
                     if (message.text.split("|")[1]) {
-                        chatText.innerHTML = "<img src='https://scp.pfortner.co.za/assets/icons/phone.png' style='width: 20px'/> " + user.name + " established a call with " + message.text.split("|")[2];
+                        chatText.innerHTML += "<img src='https://scp.pfortner.co.za/assets/icons/phone.png' style='width: 20px'/> " + user.name + " established a call with " + message.text.split("|")[2];
 
                         chatText.innerHTML += `<br/><br />
 								<audio controls style="width: 250px">
@@ -803,21 +872,25 @@
 								</audio>
 							`;
                     } else {
-                        chatText.innerHTML = "<img src='https://scp.pfortner.co.za/assets/icons/phonerr.png' style='width: 20px'/> " + user.name + " attempted a call with " + message.text.split("|")[2];
+                        chatText.innerHTML += "<img src='https://scp.pfortner.co.za/assets/icons/phonerr.png' style='width: 20px'/> " + user.name + " attempted a call with " + message.text.split("|")[2];
                     }
                 }
 
                 if (message.type === "addu") {
-                    chatText.innerHTML = "User " + message.text.split("|")[1] + " was added to the conversation";
+                    chatText.innerHTML = "User <b>" + message.text.split("|")[1] + "</b> was added to the conversation";
+                    chatText.setAttribute("class", "direct-chat-statusmessage");
                 }
                 if (message.type === "delu") {
-                    chatText.innerHTML = "User " + message.text.split("|")[1] + " was removed from the conversation";
+                    chatText.innerHTML = "User <b>" + message.text.split("|")[1] + "</b> was removed from the conversation";
+                    chatText.setAttribute("class", "direct-chat-statusmessage");
                 }
                 if (message.type === "addg") {
-                    chatText.innerHTML = "Group " + message.text.split("|")[1] + " was added to the conversation";
+                    chatText.innerHTML = "Group <b>" + message.text.split("|")[1] + "</b> was added to the conversation";
+                    chatText.setAttribute("class", "direct-chat-statusmessage");
                 }
                 if (message.type === "delg") {
-                    chatText.innerHTML = "Group " + message.text.split("|")[1] + " was removed from the conversation";
+                    chatText.innerHTML = "Group <b>" + message.text.split("|")[1] + "</b> was removed from the conversation";
+                    chatText.setAttribute("class", "direct-chat-statusmessage");
                 }
 
                 chatContainer.appendChild(chatText);
@@ -876,6 +949,72 @@
                 }
             }
         }
+        //Format dates and times
+        function strftime(sFormat, date) {
+          if (!(date instanceof Date)) date = new Date();
+          var nDay = date.getDay(),
+            nDate = date.getDate(),
+            nMonth = date.getMonth(),
+            nYear = date.getFullYear(),
+            nHour = date.getHours(),
+            aDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            aMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            aDayCount = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334],
+            isLeapYear = function() {
+              return (nYear%4===0 && nYear%100!==0) || nYear%400===0;
+            },
+            getThursday = function() {
+              var target = new Date(date);
+              target.setDate(nDate - ((nDay+6)%7) + 3);
+              return target;
+            },
+            zeroPad = function(nNum, nPad) {
+              return ('' + (Math.pow(10, nPad) + nNum)).slice(1);
+            };
+          return sFormat.replace(/%[a-z]/gi, function(sMatch) {
+            return {
+              '%a': aDays[nDay].slice(0,3),
+              '%A': aDays[nDay],
+              '%b': aMonths[nMonth].slice(0,3),
+              '%B': aMonths[nMonth],
+              '%c': date.toUTCString(),
+              '%C': Math.floor(nYear/100),
+              '%d': zeroPad(nDate, 2),
+              '%e': nDate,
+              '%F': date.toISOString().slice(0,10),
+              '%G': getThursday().getFullYear(),
+              '%g': ('' + getThursday().getFullYear()).slice(2),
+              '%H': zeroPad(nHour, 2),
+              '%I': zeroPad((nHour+11)%12 + 1, 2),
+              '%j': zeroPad(aDayCount[nMonth] + nDate + ((nMonth>1 && isLeapYear()) ? 1 : 0), 3),
+              '%k': '' + nHour,
+              '%l': (nHour+11)%12 + 1,
+              '%m': zeroPad(nMonth + 1, 2),
+              '%M': zeroPad(date.getMinutes(), 2),
+              '%p': (nHour<12) ? 'AM' : 'PM',
+              '%P': (nHour<12) ? 'am' : 'pm',
+              '%s': Math.round(date.getTime()/1000),
+              '%S': zeroPad(date.getSeconds(), 2),
+              '%u': nDay || 7,
+              '%V': (function() {
+                      var target = getThursday(),
+                        n1stThu = target.valueOf();
+                      target.setMonth(0, 1);
+                      var nJan1 = target.getDay();
+                      if (nJan1!==4) target.setMonth(0, 1 + ((4-nJan1)+7)%7);
+                      return zeroPad(1 + Math.ceil((n1stThu-target)/604800000), 2);
+                    })(),
+              '%w': '' + nDay,
+              '%x': date.toLocaleDateString(),
+              '%X': date.toLocaleTimeString(),
+              '%y': ('' + nYear).slice(2),
+              '%Y': nYear,
+              '%z': date.toTimeString().replace(/.+GMT([+-]\d+).+/, '$1'),
+              '%Z': date.toTimeString().replace(/.+\((.+?)\)$/, '$1')
+            }[sMatch] || sMatch;
+          });
+        }
+
         //Check session still active and then load the page sections
         scpAPICall("session/access", function(response) {
             if (response > 0) {

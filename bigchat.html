@@ -133,6 +133,7 @@
         }
         .skin-blue-light .sidebar-menu>li>.treeview-menu {
             background: none;
+
         }
         
         .conversation-list-li {
@@ -565,7 +566,7 @@
                             <span>CONVERSATIONS</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
-                        <ul class="treeview-menu" id="conversation-container" style="overflow: auto;">
+                        <ul class="treeview-menu" id="conversation-container" style="overflow-y: scroll;-webkit-overflow-scrolling: touch;">
                         </ul>
                     </li>
                 </ul>
@@ -585,18 +586,13 @@
                         <div class="box-new-conv box-primary ">
 
                             <div class="box-header with-border ">
-                              <h3 class="box-title">New Conversation</h3>
+                              <input type="email" class="form-control" id="frmConvSubject" placeholder="CONVERSATION SUBJECT">
                             </div>
                             <!-- /.box-header -->
                             <!-- form start -->
                             <form role="form">
                               <div class="box-body">
-                                <div class="form-group">
-                                 <br>
-                                  <input type="email" class="form-control" id="frmConvSubject" placeholder="SUBJECT">
-                                </div>
 
-                                  <hr>
                                   <div class="row">
                                     <div class="col-md-6"><label>Find a user / group:</label>
                                         <input type="email" class="form-control" id="frmSearchUser" placeholder="search">
@@ -611,7 +607,7 @@
                               <!-- /.box-body -->
 
 
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary pull-right" style="margin: 10px;">Submit</button>
 
                             </form>
                           </div>
@@ -1245,7 +1241,11 @@
 
                 document.getElementById("mainchatBox").style.display = "none"
                 document.getElementById("mainconCreate").style.display = ""
-
+                if (window.outerWidth <767){
+                    $('body').removeClass("sidebar-open");
+                    $('body').addClass("sidebar-collapse");
+                }
+                document.getElementById("sidebar-users").innerHTML="";
             };
         
         //Make URLs and emails linkable

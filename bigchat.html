@@ -492,6 +492,25 @@
             width: 100%;
             box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
         }
+        
+        .frmSearchUser { border: 1px solid #999; background: #FFF; overflow: auto; }
+        .frmSearchUser { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+        .frmSearchUser { background: #F0F0F0; }
+        .frmSearchUser strong { font-weight: normal; color: #3399FF; }
+        .frmSearchUser { padding: 2px 5px; }
+        .frmSearchUser strong { display: block; border-bottom: 1px solid #000; }
+        
+        
+        .container { width: 800px; margin: 0 auto; }
+
+        .autocomplete-suggestions { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border: 1px solid #999; background: #FFF; cursor: default; overflow: auto; -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); }
+        .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+        .autocomplete-no-suggestion { padding: 2px 5px;}
+        .autocomplete-selected { background: #F0F0F0; }
+        .autocomplete-suggestions strong { font-weight: bold; color: #000; }
+        .autocomplete-group { padding:10px 5px 2px 5px; font-weight: bold; font-size: 16px; color: #000; display: block; border-bottom: 1px solid #000; }
+
+
             </style>
 </head>
 
@@ -499,6 +518,7 @@
 
     <span id="notification" style="">
         <div id="notification_connectionDead" class="app-alert-item mod-error">Could not connect to SCP Server.<br>
+            <span id="alertmessageinfo"></span>
             <a class="app-alert-item-button" href="#" onclick="window.location.reload()">Reload page</a>
         </div>
     </span>
@@ -507,7 +527,7 @@
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="index2.html" class="logo hidden-xs" style="background-color: #fff;">
+            <a href="bigchat.html" class="logo hidden-xs" style="background-color: #fff;">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>DCX</b></span>
                 <span class="logo-lg" style="background-color: #fff;"><img src="Images/DCXLogo.jpg" border="0"></span>
@@ -583,50 +603,43 @@
                         <div class="row" style="display: none" id="mainconCreate">
                             <div class="col-md-3 hidden-xs"></div>
                             <div class="col-md-6">
-                        <div class="box-new-conv box-primary ">
+                        <div class="box box-new-conv box-primary ">
 
-                            <div class="box-header with-border ">
+                            <div class="box-header with-border " >
                               <input type="email" class="form-control" id="frmConvSubject" placeholder="CONVERSATION SUBJECT">
                             </div>
                             <!-- /.box-header -->
                             <!-- form start -->
-                            <form role="form">
-                              <div class="box-body">
+
+                              <div class="box-body" style="padding-top: 35px;">
 
                                   <div class="row">
-                                    <div class="col-md-6"><label>Find a user / group:</label>
-                                        <input type="email" class="form-control" id="frmSearchUser" placeholder="search">
+                                    <div class="col-md-12"><label>Find a user / group:&nbsp;</label>
+                                        <input type="email" class="frmSearchUser" id="frmSearchUser" placeholder="search" style="max-width: 500px; width: 100%;">
                                     </div>
-                                    <div class="col-md-6">
                                     
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="convNewUsers" style="padding-top: 30px;padding-bottom: 30px;" class="convNewUsersCL"></div> 
                                     </div>
                                   </div>
-                                  
 
                               </div>
+                            <div class="" id="message-loading-overlay-new">
+                              <i class="" id="message-loading-spinner-new"></i>
+                            </div>
                               <!-- /.box-body -->
 
+                                <button type="button" id="create-Conv" class="btn btn-primary btn-block btn-flat" style="border-radius: 0.5em;">Create</button>
 
-                                <button type="submit" class="btn btn-primary pull-right" style="margin: 10px;">Submit</button>
 
-                            </form>
                           </div>
                             </div>
                             <div class="col-md-3 hidden-xs"></div>
                         </div>
                         <!-- DIRECT CHAT -->
                         <div class="box box-warning direct-chat direct-chat-warning" style="border-top-color:#bbd9e9; border-top-width: 0px; " id="mainchatBox">
-                            <div class="box-header with-border hidden">
-                                <h1 class="box-title" id="conversation-title"></h1>
-                                <br><small id="participants-list" style="overflow: hidden"></small>
-                                <!--<div class="box-tools pull-right">
-                                    <span data-toggle="tooltip" title="3 New Messages" class="badge bg-yellow">3</span>
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"><i class="fa fa-comments"></i></button>
-                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                </div>-->
-                            </div>
-                            <!-- /.box-header -->
                             <div class="box-body">
                                 <!-- Conversations are loaded here -->
                                 <div class="direct-chat-messages" id="message-container">
@@ -693,6 +706,7 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="dist/js/app.min.js"></script>
     <script src="dist/js/pace.js"></script>
+    <script type="text/javascript" src="plugins/jquery.autocomplete.js"></script>
     <!--<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>-->
     <!--<script src="dist/js/demo.js"></script>-->
 
@@ -704,7 +718,7 @@
                 window.innerHeight -
                 document.getElementsByClassName("main-header")[0].clientHeight -
                // document.getElementsByClassName("box-header")[0].clientHeight -
-                document.getElementsByClassName("box-footer")[0].clientHeight - 6
+                document.getElementsByClassName("box-footer")[0].clientHeight - 30
             ) + "px";
 
             var element = document.getElementById("message-container");
@@ -749,13 +763,13 @@
         var pollTimer = 0;
         var conversationId = 0;
 
-        function scpAPICall(api, callback, data = null) {
-            $(document).ajaxStart(function() {
-                Pace.restart();
-            });
+        function scpAPICall(api, callback, data = null, Synchro=true) {
+            
+
             var xmlHttp = new XMLHttpRequest();
+
             try{
-                xmlHttp.open("post", "https://" + DOMAIN + "/request/api/" + api, true);
+                xmlHttp.open("post", "https://" + DOMAIN + "/request/api/" + api, Synchro);
                 xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8 ");
                 xmlHttp.withCredentials = true;
                 xmlHttp.onreadystatechange = function(e) {
@@ -766,20 +780,25 @@
                         }
                     }
                 };
+
                 xmlHttp.send(data);
-                var xmlHttpTimeout=setTimeout(ajaxTimeout,10000);
+
+                var xmlHttpTimeout=setTimeout(ajaxTimeout,20000);
                 function ajaxTimeout(){
                    xmlHttp.abort();
-                   var notificationalert = document.getElementById("notification");
-                   notificationalert.setAttribute("style", "display: block;");
-                   //alert("Request timed out");
+                   if (Synchro==true){
+                       var notificationalert = document.getElementById("notification");
+                       notificationalert.setAttribute("style", "display: block;");
+                       // document.getElementById("alertmessageinfo").innerHTML="Timeout: "+api;
+                   }
                 }
              } catch (e) {
                          var notificationalert = document.getElementById("notification");
                            notificationalert.setAttribute("style", "display: block;");
-                        //alert("There was a problem connecting to the server. Please try again later");
+                         //  document.getElementById("alertmessageinfo").innerHTML="Error: "+api;
                         console.error(e);
                 }
+
         }
 
         function populateDetails() {
@@ -793,6 +812,7 @@
         }
 
         function populateConversations() {
+
             scpAPICall("conversations/list", function(response) {
                 conversations = JSON.parse(response).items;
 
@@ -862,10 +882,8 @@
                 // Set first conversation as selected
                 document.getElementById("conversation-container").children[0].setAttribute("class", "conversation-list-li conversation-list-active");
             }, "ps=10&pg=1&op=16");
+
         }
-
-
-
 
         function renderMessages(conversation, messagesResponse) {
             // set overlay
@@ -924,7 +942,7 @@
                 //    return element.name;
                // }).join(", ");
                 resize();
-            }, "id=" + conversation.id);
+            }, "id=" + conversation.id, true);
 
             var repeatuserid =0;
             var MessageDateCheck="";
@@ -1146,6 +1164,7 @@
                 }
             }
         }
+        
         //Format dates and times
         function strftime(sFormat, date) {
           if (!(date instanceof Date)) date = new Date();
@@ -1230,13 +1249,12 @@
             };
 
         //Show Create conversation
-        //newconvBTN mainchatBox mainconCreate
             document.getElementById("newconvBTN").onclick = function () {
 
                 for (var i = 0; i < document.getElementById("conversation-container").children.length; i++) {
                     document.getElementById("conversation-container").children[i].setAttribute("class", "conversation-list-li");
                 }
-
+                document.getElementById("conversation-title-bar").innerHTML="New Conversation";
                 document.getElementById("message-container").innerHTML = "";
 
                 document.getElementById("mainchatBox").style.display = "none"
@@ -1247,7 +1265,119 @@
                 }
                 document.getElementById("sidebar-users").innerHTML="";
             };
+
+        //Autocomplete search users for new conversation
+        //https://www.devbridge.com/sourcery/components/jquery-autocomplete/
+            $('#frmSearchUser').autocomplete({
+                minChars:2,
+                preserveInput: true,
+                lookup: function (query, done) {
+                    var result = {};
+                    var suggestions = [];
+                    result.suggestions = suggestions;
+
+
+                    scpAPICall("users/list", function(response) {
+                        searchresults = JSON.parse(response).items;
+                        if (response !="[]") {
+                            searchresults.forEach(function (element) {
+                                result.suggestions.push({
+                                    "value": element.name,
+                                    "data":  { category: 'Users' },
+                                    "myid": element.id
+                                });
+                            });
+                        }
+
+                    },"qs=" + query + "&op=33",false);
+
+                    scpAPICall("users/list", function(response) {
+                        searchresults = JSON.parse(response).items;
+                        if (response !="[]") {
+                            searchresults.forEach(function (element) {
+                                result.suggestions.push({
+                                    "value": element.name,
+                                    "data":  { category: 'Clients' },
+                                    "myid": element.id
+                                });
+                            });
+                        }
+
+                    },"qs=" + query + "&op=34",false);
+
+                    scpAPICall("groups/list", function(response) {
+                        searchGresults = JSON.parse(response).items;
+                        if (response !="[]") {
+                            searchGresults.forEach(function (element) {
+                                result.suggestions.push({
+                                    "value": element.name,
+                                    "data":  { category: 'Groups' },
+                                    "myid": element.id
+                                });
+                            });
+                        }
+
+                    },"qs=" + query + "&op=0",false);
+
+                    console.log(result);
+                    done(result);
+                },
+                groupBy: 'category',
+                onSelect: function (suggestion) {
+                    $('#convNewUsers').append('<div userid="'+suggestion.myid+'" class="list-'+suggestion.data.category+'" usertype="'+suggestion.data.category+'" >' + suggestion.value +' ('+suggestion.data.category+')' + ' &nbsp;&nbsp;&nbsp;<a href="#" class="item"><i class="fa fa-trash-o"></i></a></div>');
+                }
+            });
         
+         //Remove user from list
+        $(document).on('click','.item',function(){
+            $(this).parent().remove();
+        });
+
+
+        //Send create conversation API call
+        document.getElementById("create-Conv").onclick = function () {
+
+            if (document.getElementById("frmConvSubject").value != "" ) {
+                var messageovelay = document.getElementById("message-loading-overlay-new");
+                messageovelay.setAttribute("class", "overlay");
+                var messagespinner = document.getElementById("message-loading-spinner-new");
+                messagespinner.setAttribute("class", "fa fa-refresh fa-spin");
+
+                var querystring="subject="+document.getElementById("frmConvSubject").value;
+
+
+                $('.list-Users').each(function(index){
+                    querystring+="&user["+$(this).attr('userid')+"]="+$(this).attr('userid')
+                });
+                $('.list-Groups').each(function(index){
+                    querystring+="&group["+$(this).attr('userid')+"]="+$(this).attr('userid')
+                });
+                $('.list-Clients').each(function(index){
+                    querystring+="&user["+$(this).attr('userid')+"]="+$(this).attr('userid')
+                });
+
+                querystring+="&flags:0"
+                console.log(querystring);
+
+                scpAPICall("conversation/create", function(response) {
+                        console.log(response);
+                        if (response!=""){
+                            document.getElementById("conversation-container").innerHTML="";
+                            populateConversations();
+                            document.getElementById("mainchatBox").style.display = "";
+                            document.getElementById("mainconCreate").style.display = "none";
+
+                        }
+
+                    },encodeURI(querystring));
+                // Clear overlay
+                messageovelay.setAttribute("class", "");
+                messagespinner.setAttribute("class", "");
+            } else {
+                alert("Please enter a conversation subject");
+            }
+        };
+
         //Make URLs and emails linkable
         if(!String.linkify) {
             String.prototype.linkify = function() {

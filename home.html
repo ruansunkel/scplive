@@ -509,7 +509,9 @@
 
         // Globals
         var MSCT = 0;
+        var TIMESTAMP = 0;
         var pollTimer = 0;
+        var conversationPollTimer = 0;
         var conversationId = 0;
 
         function scpAPICall(api, callback, data = null) {
@@ -540,44 +542,97 @@
             });
         }
 
+        // Conversation Functions
+        function renderConversations(conversations) {
+            // Loop through converations and create html elements and events
+            conversations.reverse().forEach(function(element) {
+                // Loop through current conversations and remove existing conversations
+                for (var i = 0; i < document.getElementById("conversation-container").children.length; i++) {
+                    if (parseInt(document.getElementById("conversation-container").children[i].getAttribute("conversation-id")) === element.id) {
+                        document.getElementById("conversation-container").children[i].remove();
+                    }
+                }
+
+                // Create html element
+                var li = document.createElement("li");
+                li.setAttribute("conversation-id", element.id);
+                document.getElementById("conversation-container").insertBefore(li, document.getElementById("conversation-container").firstChild);
+
+                var href = document.createElement("a");
+                href.setAttribute("href", "#");
+                li.appendChild(href);
+                if ((element.flags & 16) === 16) {
+                    href.innerHTML = "<i class='fa fa-circle-o'></i>" + element.users[Object.keys(element.users)];
+                } else {
+                    href.innerHTML = "<i class='fa fa-circle-o'></i>" + element.subject;
+                }
+                if ((element.flags & 1) === 1) {
+                    li.classList.add("unread");
+                }
+
+                // Set click listener
+                href.onclick = function() {
+                    for (var i = 0; i < document.getElementById("conversation-container").children.length; i++) {
+                        document.getElementById("conversation-container").children[i].classList.remove("active");
+                    }
+
+                    document.getElementById("message-container").innerHTML = "";
+                    li.classList.add("active");
+                    li.classList.remove("unread");
+                    populateMessages(element);
+                    conversationId = element.id;
+                }
+            }, this);
+
+            // Set selected conversation
+            for (var i = 0; i < document.getElementById("conversation-container").children.length; i++) {
+                if (parseInt(document.getElementById("conversation-container").children[i].getAttribute("conversation-id")) === conversationId) {
+                    document.getElementById("conversation-container").children[i].setAttribute("class", "active");
+                }
+            }
+        }
+
         function populateConversations() {
             scpAPICall("conversations/list", function(response) {
                 conversations = JSON.parse(response).items;
 
                 // Fetch messages of first conversation
-                populateMessages(conversations[0]);
-                conversationId = conversations[0].id;
-
-                // Create Conversation Elements
-                conversations.forEach(function(element) {
-                    var li = document.createElement("li");
-                    document.getElementById("conversation-container").appendChild(li);
-                    var href = document.createElement("a");
-                    href.setAttribute("href", "#");
-                    li.appendChild(href);
-                    if ((element.flags & 16) === 16) {
-                        href.innerHTML = "<i class='fa fa-circle-o'></i>" + element.users[Object.keys(element.users)];
-                    } else {
-                        href.innerHTML = "<i class='fa fa-circle-o'></i>" + element.subject;
-                    }
-
-                    href.onclick = function() {
-                        for (var i = 0; i < document.getElementById("conversation-container").children.length; i++) {
-                            document.getElementById("conversation-container").children[i].setAttribute("class", "");
+                if (conversations) {
+                    // Update timestamp
+                    conversations.forEach(function(conversation) {
+                        if (conversation.created > TIMESTAMP) {
+                            TIMESTAMP = conversation.created + 1;
                         }
+                    });
+                    populateMessages(conversations[0]);
+                    conversationId = conversations[0].id;
 
-                        document.getElementById("message-container").innerHTML = "";
-                        li.setAttribute("class", "active");
-                        populateMessages(element);
-                        conversationId = element.id;
-                    }
-                }, this);
+                    renderConversations(conversations);
+                }
 
-                // Set first conversation as selected
+                // Start Conversation Polling
+                conversationPollTimer = setInterval(function() {
+                    scpAPICall("conversations/list", function(response) {
+                        conversations = JSON.parse(response).items;
+
+                        if (conversations) {
+                            // Update timestamp
+                            conversations.forEach(function(conversation) {
+                                if (conversation.created > TIMESTAMP) {
+                                    TIMESTAMP = conversation.created + 1;
+                                }
+                            });
+
+                            renderConversations(conversations);
+                        }
+                    }, "ps=10&pg=1&op=16&ts=" + TIMESTAMP);
+                }, 3000);
+
                 document.getElementById("conversation-container").children[0].setAttribute("class", "active");
             }, "ps=10&pg=1&op=16");
         }
 
+        // Message Functions
         function renderMessages(conversation, messagesResponse) {
             // Set Conversation Title
             if ((conversation.flags & 16) === 16) {

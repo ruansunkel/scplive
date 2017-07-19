@@ -441,75 +441,145 @@
             width: 0px;
           }
         @media (min-width: 768px) {
-          .sidebar-mini.sidebar-collapse .content-wrapper,
-          .sidebar-mini.sidebar-collapse .right-side,
-          .sidebar-mini.sidebar-collapse .main-footer {
-            margin-left: 0px !important;
-            z-index: 840;
-          }
-          .sidebar-mini.sidebar-collapse .main-sidebar {
-            -webkit-transform: translate(0, 0);
-            -ms-transform: translate(0, 0);
-            -o-transform: translate(0, 0);
-            transform: translate(0, 0);
-            width: 0px !important;
-            z-index: 850;
-          }
-          .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > span:not(.pull-right),
-            .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > .treeview-menu {
-            display: block !important;
-            position: absolute;
-            width: 0px;
-            left: 0px;
+            .sidebar-mini.sidebar-collapse .content-wrapper, .sidebar-mini.sidebar-collapse .right-side, .sidebar-mini.sidebar-collapse .main-footer {
+                margin-left: 0px !important;
+                z-index: 840;
             }
-          .sidebar-mini.sidebar-collapse .main-sidebar .user-panel > .info,
-          .sidebar-mini.sidebar-collapse .sidebar-form,
-        .sidebar-mini.sidebar-collapse .btn-newConv,
-          .sidebar-mini.sidebar-collapse .sidebar-menu > li > a > span,
-          .sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu,
-          .sidebar-mini.sidebar-collapse .sidebar-menu > li > a > .pull-right,
-          .sidebar-mini.sidebar-collapse .sidebar-menu li.header {
-            display: none !important;
-            -webkit-transform: translateZ(0);
-          }
-        .sidebar-form, .btn-newConv,
-        .sidebar-menu > li.header {
-          overflow: hidden;
-          text-overflow: clip;
-        }
-        
-        .box-new-conv.box-primary {
-            border-top-color: #3c8dbc;
-        }
 
-        .box-new-conv {
-            position: relative;
-            border-radius: 3px;
-            background: #ffffff;
-            border-top: 3px solid #d2d6de;
-            margin-bottom: 20px;
-            margin-top: 20px;
-            width: 100%;
-            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-        }
-        
-        .frmSearchUser { border: 1px solid #999; background: #FFF; overflow: auto; }
-        .frmSearchUser { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
-        .frmSearchUser { background: #F0F0F0; }
-        .frmSearchUser strong { font-weight: normal; color: #3399FF; }
-        .frmSearchUser { padding: 2px 5px; }
-        .frmSearchUser strong { display: block; border-bottom: 1px solid #000; }
-        
-        
-        .container { width: 800px; margin: 0 auto; }
+            .sidebar-mini.sidebar-collapse .main-sidebar {
+                -webkit-transform: translate(0, 0);
+                -ms-transform: translate(0, 0);
+                -o-transform: translate(0, 0);
+                transform: translate(0, 0);
+                width: 0px !important;
+                z-index: 850;
+            }
 
-        .autocomplete-suggestions { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border: 1px solid #999; background: #FFF; cursor: default; overflow: auto; -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); }
-        .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
-        .autocomplete-no-suggestion { padding: 2px 5px;}
-        .autocomplete-selected { background: #F0F0F0; }
-        .autocomplete-suggestions strong { font-weight: bold; color: #000; }
-        .autocomplete-group { padding:10px 5px 2px 5px; font-weight: bold; font-size: 16px; color: #000; display: block; border-bottom: 1px solid #000; }
+            .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > span:not(.pull-right), .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > .treeview-menu {
+                display: block !important;
+                position: absolute;
+                width: 0px;
+                left: 0px;
+            }
 
+            .sidebar-mini.sidebar-collapse .main-sidebar .user-panel > .info, .sidebar-mini.sidebar-collapse .sidebar-form, .sidebar-mini.sidebar-collapse .btn-newConv, .sidebar-mini.sidebar-collapse .sidebar-menu > li > a > span, .sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu, .sidebar-mini.sidebar-collapse .sidebar-menu > li > a > .pull-right, .sidebar-mini.sidebar-collapse .sidebar-menu li.header {
+                display: none !important;
+                -webkit-transform: translateZ(0);
+            }
+
+            .sidebar-form, .btn-newConv, .sidebar-menu > li.header {
+                overflow: hidden;
+                text-overflow: clip;
+            }
+
+            .box-new-conv.box-primary {
+                border-top-color: #3c8dbc;
+            }
+
+            .box-new-conv {
+                position: relative;
+                border-radius: 3px;
+                background: #ffffff;
+                border-top: 3px solid #d2d6de;
+                margin-bottom: 20px;
+                margin-top: 20px;
+                width: 100%;
+                box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            }
+
+            .frmSearchUser {
+                border: 1px solid #999;
+                background: #FFF;
+                overflow: auto;
+            }
+
+            .frmSearchUser {
+                padding: 2px 5px;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+
+            .frmSearchUser {
+                background: #F0F0F0;
+            }
+
+            .frmSearchUser strong {
+                font-weight: normal;
+                color: #3399FF;
+            }
+
+            .frmSearchUser {
+                padding: 2px 5px;
+            }
+
+            .frmSearchUser strong {
+                display: block;
+                border-bottom: 1px solid #000;
+            }
+
+
+            .container {
+                width: 800px;
+                margin: 0 auto;
+            }
+
+            .autocomplete-suggestions {
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+                border: 1px solid #999;
+                background: #FFF;
+                cursor: default;
+                overflow: auto;
+                -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+                -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+                box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+            }
+
+            .autocomplete-suggestion {
+                padding: 2px 5px;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+
+            .autocomplete-no-suggestion {
+                padding: 2px 5px;
+            }
+
+            .autocomplete-selected {
+                background: #F0F0F0;
+            }
+
+            .autocomplete-suggestions strong {
+                font-weight: bold;
+                color: #000;
+            }
+
+            .autocomplete-group {
+                padding: 10px 5px 2px 5px;
+                font-weight: bold;
+                font-size: 16px;
+                color: #000;
+                display: block;
+                border-bottom: 1px solid #000;
+            }
+
+            .unread {
+                border-right: 10px solid #f39c12;
+            }
+        
+            input[type="file"] {
+                display: none;
+            }
+            .custom-file-upload {
+                border: 1px solid #ccc;
+                display: inline-block;
+                padding: 6px 12px;
+                cursor: pointer;
+                display: table-cell;
+                vertical-align: top;
+                width: 120px;
+            }
 
             </style>
 </head>
@@ -652,9 +722,13 @@
                             <!-- /.box-body -->
                             <div class="box-footer">
                                 <!--<form action="#" method="post">-->
-                                <div class="input-group">
+                                <div class="input-group" style="    height: 30px;">
+                                    <label for="file-upload" class="custom-file-upload">
+                                        <i class="fa fa-upload"></i> Upload File
+                                    </label>
+                                    <input id="file-upload" type="file"/>
                                     <input id="text-input" type="text" name="message" placeholder="Type Message ..." class="form-control" autocomplete="off">
-                                    <span id="send-button" class="input-group-btn"><button type="button" class="btn btn-info btn-flat">Send</button></span>
+                                    <span id="send-button" class="input-group-btn" style="    vertical-align: top;"><button type="button" class="btn btn-info btn-flat">Send</button></span>
                                 </div>
                                 <!--</form>-->
                             </div>
@@ -760,7 +834,9 @@
 
         // Globals
         var MSCT = 0;
+        var TIMESTAMP = 0;
         var pollTimer = 0;
+        var conversationPollTimer = 0;
         var conversationId = 0;
 
         function scpAPICall(api, callback, data = null, Synchro=true) {
@@ -811,81 +887,152 @@
             });
         }
 
-        function populateConversations() {
 
+        // Conversation Functions
+        function renderConversations(conversations) {
+            // Loop through converations and create html elements and events
+            conversations.reverse().forEach(function(element) {
+                // Loop through current conversations and remove existing conversations
+                for (var i = 0; i < document.getElementById("conversation-container").children.length; i++) {
+                    if (parseInt(document.getElementById("conversation-container").children[i].getAttribute("conversation-id")) === element.id) {
+                        document.getElementById("conversation-container").children[i].remove();
+                    }
+                }
+
+                // Create html element
+                var li = document.createElement("li");
+                li.setAttribute("class", "conversation-list-li");
+                li.setAttribute("conversation-id", element.id);
+                document.getElementById("conversation-container").insertBefore(li, document.getElementById("conversation-container").firstChild);
+                //document.getElementById("conversation-container").appendChild(li);
+                var href = document.createElement("a");
+                href.setAttribute("href", "#");
+                li.appendChild(href);
+                //if ((element.flags & 16) === 16) {
+                //    href.innerHTML = "<i class='fa fa-circle-o'></i>" + element.users[Object.keys(element.users)];
+                //} else {
+                //    href.innerHTML = "<i class='fa fa-circle-o'></i>" + element.subject;
+                //}
+                var convImg;
+                var convSubject;
+                if ((element.flags & 16) === 16) {
+                    convImg = "https://scp.pfortner.co.za/media/avatar/" + Object.keys(element.users) + "/48x48";
+                    convSubject = element.users[Object.keys(element.users)];
+                } else {
+                    convImg = "https://scp.pfortner.co.za/assets/defaults/group.png";
+                    convSubject = element.subject;
+                }
+                //*************************************////*************************************//
+                if ((element.flags & 1) === 1) {
+                    console.log("Change icon");
+                    change_favicon('faviconalert.ico');
+                    li.classList.add("unread");
+                }
+
+
+                var convDiv = document.createElement("div");
+                href.appendChild(convDiv);
+
+                var convDivImg = document.createElement("img");
+                convDivImg.setAttribute("style", "height:48px;width:48px;vertical-align: middle;display: inline-block;margin-right: 10px;");
+                convDivImg.setAttribute("class", "direct-chat-img");
+                convDivImg.setAttribute("src", convImg);
+                convDivImg.setAttribute("border", "0");
+                convDiv.appendChild(convDivImg);
+
+                var convDivTxt = document.createElement("div");
+                convDivTxt.setAttribute("style", "vertical-align: middle;display: inline-block; font-size: medium;");
+                convDiv.appendChild(convDivTxt);
+
+                    
+                convDivTxt.innerHTML=convSubject+"<span style='display: block;color: #444; font-size: 12px; white-space:pre-line; width:230px; word-break: break-word;'>"+element.value.substring(0,70)+"</span>"
+
+
+                // Set click listener
+                href.onclick = function() {
+                    $("#conversation-container>li.conversation-list-active").removeClass("conversation-list-active");
+
+                    document.getElementById("message-container").innerHTML = "";
+                    li.setAttribute("class", "conversation-list-li conversation-list-active");
+                    //*************************************////*************************************//
+                    //*************************************////*************************************//
+                    li.classList.remove("unread");
+                    console.log("Change back");
+                    change_favicon('favicon.ico');
+                    populateMessages(element);
+                    conversationId = element.id;
+                    if (window.outerWidth <767){
+                        $('body').removeClass("sidebar-open");
+                        $('body').addClass("sidebar-collapse");
+                    }
+                    if (document.getElementById("mainconCreate").style.display == ""){
+                        document.getElementById("mainchatBox").style.display = ""
+                        document.getElementById("mainconCreate").style.display = "none"
+                    }
+                }
+
+
+            }, this);
+
+            // Set selected conversation
+            for (var i = 0; i < document.getElementById("conversation-container").children.length; i++) {
+                if (parseInt(document.getElementById("conversation-container").children[i].getAttribute("conversation-id")) === conversationId) {
+                    document.getElementById("conversation-container").children[i].setAttribute("class", "conversation-list-li conversation-list-active");
+                }
+            }
+        }
+
+        function populateConversations(foceconversationid=null) {
             scpAPICall("conversations/list", function(response) {
                 conversations = JSON.parse(response).items;
 
                 // Fetch messages of first conversation
-                populateMessages(conversations[0]);
-                conversationId = conversations[0].id;
-
-                // Create Conversation Elements
-                conversations.forEach(function(element) {
-                    var li = document.createElement("li");
-                    li.setAttribute("class", "conversation-list-li");
-                    document.getElementById("conversation-container").appendChild(li);
-                    var href = document.createElement("a");
-                    href.setAttribute("href", "#");
-                    li.appendChild(href);
-                    var convImg;
-                    var convSubject;
-                    if ((element.flags & 16) === 16) {
-                        convImg = "https://scp.pfortner.co.za/media/avatar/" + Object.keys(element.users) + "/48x48";
-                        convSubject = element.users[Object.keys(element.users)];
-                    } else {
-                        convImg = "https://scp.pfortner.co.za/assets/defaults/group.png";
-                        convSubject = element.subject;
-                    }
-
-                    // href.innerHTML
-                    var convDiv = document.createElement("div");
-                    href.appendChild(convDiv);
-
-                    var convDivImg = document.createElement("img");
-                    convDivImg.setAttribute("style", "height:48px;width:48px;vertical-align: middle;display: inline-block;margin-right: 10px;");
-                    convDivImg.setAttribute("class", "direct-chat-img");
-                    convDivImg.setAttribute("src", convImg);
-                    convDivImg.setAttribute("border", "0");
-                    convDiv.appendChild(convDivImg);
-
-                    var convDivTxt = document.createElement("div");
-                    convDivTxt.setAttribute("style", "vertical-align: middle;display: inline-block; font-size: medium;");
-                    convDiv.appendChild(convDivTxt);
-
-                    
-                    convDivTxt.innerHTML=convSubject+"<span style='display: block;color: #444; font-size: 12px; white-space:pre-line; width:230px; word-break: break-word;'>"+element.value.substring(0,70)+"</span>"
-
-
-                    href.onclick = function() {
-                        for (var i = 0; i < document.getElementById("conversation-container").children.length; i++) {
-                            document.getElementById("conversation-container").children[i].setAttribute("class", "conversation-list-li");
+                if (conversations) {
+                    // Update timestamp
+                    conversations.forEach(function(conversation) {
+                        if (conversation.created > TIMESTAMP) {
+                            TIMESTAMP = conversation.created + 1;
                         }
+                    });
+                    console.log(conversations);
+                   // if (foceconversationid==null){
+                        populateMessages(conversations[0]);
+                        conversationId = conversations[0].id;
+                   // }else{
+                    //    var index = conversations.map(function (myid) { return myid.id; }).indexOf(foceconversationid);
 
-                        document.getElementById("message-container").innerHTML = "";
-                        li.setAttribute("class", "conversation-list-li conversation-list-active");
-                        populateMessages(element);
-                        conversationId = element.id;
+                    //    console.log(index);
+                    //    populateMessages(conversations[index]);
+                    //    conversationId = conversations[index].id; 
+                   // }
+                    renderConversations(conversations);
+                }
 
-                        if (window.outerWidth <767){
-                            $('body').removeClass("sidebar-open");
-                            $('body').addClass("sidebar-collapse");
+                // Start Conversation Polling
+                conversationPollTimer = setInterval(function() {
+                    scpAPICall("conversations/list", function(response) {
+                        conversations = JSON.parse(response).items;
+
+                        if (conversations) {
+                            // Update timestamp
+                            conversations.forEach(function(conversation) {
+                                if (conversation.created > TIMESTAMP) {
+                                    TIMESTAMP = conversation.created + 1;
+                                }
+                            });
+
+                            renderConversations(conversations);
                         }
-                        if (document.getElementById("mainconCreate").style.display == ""){
-                            document.getElementById("mainchatBox").style.display = ""
-                            document.getElementById("mainconCreate").style.display = "none"
-                        }
-                        
-                    }
-                }, this);
+                    }, "ps=10&pg=1&op=16&ts=" + TIMESTAMP);
+                }, 3000);
 
-                // Set first conversation as selected
                 document.getElementById("conversation-container").children[0].setAttribute("class", "conversation-list-li conversation-list-active");
             }, "ps=10&pg=1&op=16");
-
         }
 
+        // Message Functions
         function renderMessages(conversation, messagesResponse) {
+            console.log("write message");
             // set overlay
             var messageovelay = document.getElementById("message-loading-overlay");
             messageovelay.setAttribute("class", "overlay");
@@ -1140,7 +1287,7 @@
             clearInterval(pollTimer);
             MSCT = 0;
 
-            getAndRenderMessages(conversation);
+            //getAndRenderMessages(conversation);
 
             pollTimer = setInterval(function() {
                 getAndRenderMessages(conversation);
@@ -1337,7 +1484,7 @@
         //Send create conversation API call
         document.getElementById("create-Conv").onclick = function () {
 
-            if (document.getElementById("frmConvSubject").value != "" ) {
+           // if (document.getElementById("frmConvSubject").value != "" ) {
                 var messageovelay = document.getElementById("message-loading-overlay-new");
                 messageovelay.setAttribute("class", "overlay");
                 var messagespinner = document.getElementById("message-loading-spinner-new");
@@ -1363,7 +1510,7 @@
                         console.log(response);
                         if (response!=""){
                             document.getElementById("conversation-container").innerHTML="";
-                            populateConversations();
+                            populateConversations(response);
                             document.getElementById("mainchatBox").style.display = "";
                             document.getElementById("mainconCreate").style.display = "none";
 
@@ -1373,9 +1520,9 @@
                 // Clear overlay
                 messageovelay.setAttribute("class", "");
                 messagespinner.setAttribute("class", "");
-            } else {
-                alert("Please enter a conversation subject");
-            }
+          //  } else {
+          //      alert("Please enter a conversation subject");
+          //  }
         };
 
         //Make URLs and emails linkable
@@ -1397,6 +1544,22 @@
                     .replace(pseudoUrlPattern, '$1<a target="_blank" href="http://$2">$2</a>')
                     .replace(emailAddressPattern, '<a href="mailto:$&">$&</a>');
             };
+        }
+
+        //Change the favicon for notifications
+        function change_favicon(img) {
+            var favicon = document.querySelector('link[rel="shortcut icon"]');
+    
+            if (!favicon) {
+                favicon = document.createElement('link');
+                favicon.setAttribute('rel', 'shortcut icon');
+                var head = document.querySelector('head');
+                head.appendChild(favicon);
+            }
+    
+    
+            favicon.setAttribute('type', 'image/ico');
+            favicon.setAttribute('href', img);
         }
 
     </script>

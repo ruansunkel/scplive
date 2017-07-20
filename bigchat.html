@@ -18,7 +18,11 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-    <style>
+    <style type="text/css">
+        
+        .layout-boxed {
+           background:none; 
+        }
         .btn-newConv {
             border-radius: 3px;
             position: relative;
@@ -42,7 +46,7 @@
         .direct-chat-warning .right>.direct-chat-text:before {
             border-left-color: #5EA5CF;
         }
-        
+
         .direct-chat-warning .rightrepeat>.direct-chat-text:after,
         .direct-chat-warning .rightrepeat>.direct-chat-text:before {
                 border: none transparent;
@@ -59,8 +63,8 @@
             color: #fff;
             text-align: right;
             float: right;
-            width: 74%;
-            max-width: 800px;
+            
+            max-width: 80%;
         }
         .direct-chat-warning .rightrepeat>.direct-chat-text {
             background: #5EA5CF;
@@ -68,8 +72,8 @@
             color: #fff;
             text-align: right;
             float: right;
-            width: 74%;
-            max-width: 800px;
+            /*width: 74%;*/
+            max-width: 80%;
             margin-right: 40px;
             margin-left: 0;
         }        
@@ -110,12 +114,18 @@
         }
         .leftrepeat{
             margin-top: 0px;
+                padding-left: 30px;
         }
         .rightrepeat{
             margin-top: 0px;
         }
         .direct-chat-text {
-            max-width: 800px;
+            max-width: 80%;
+            float: left;
+            padding: 7px 12px;
+            text-align: left;
+            min-width: 150px;
+            margin: 0px 0 0 15px;
         }
         .direct-chat-statusmessage{
             text-align: center;
@@ -123,9 +133,11 @@
             margin-top: 10px;
         }
         .direct-chat-timestamp-left {
-            color: #fff;
+            color: #999;
             padding-right: 5px;
             font-size: 11px;
+            position: relative;
+            float: right;
         }
         .direct-chat-timestamp {
             font-size: 11px;
@@ -135,7 +147,7 @@
             background: none;
 
         }
-        
+
         .conversation-list-li {
             height: 70px;
             padding-top: 6px;
@@ -183,7 +195,7 @@
             -webkit-box-shadow: 2px 4px 20px #777;
             -khtml-box-shadow: 2px 4px 20px #777;
         }
-        
+
         .box-header>.fa,
         .box-header>.glyphicon,
         .box-header>.ion,
@@ -218,6 +230,7 @@
         .layout-top-nav .main-footer {
           margin-left: 0;
         }
+
         @media (max-width: 767px) {
           .content-wrapper,
           .right-side,
@@ -270,6 +283,9 @@
             transform: translate(-330px, 0);
           }
         }
+    
+        
+
         .control-sidebar-bg,
         .control-sidebar {
           top: 0;
@@ -445,7 +461,7 @@
                 margin-left: 0px !important;
                 z-index: 840;
             }
-
+        }
             .sidebar-mini.sidebar-collapse .main-sidebar {
                 -webkit-transform: translate(0, 0);
                 -ms-transform: translate(0, 0);
@@ -584,7 +600,7 @@
             </style>
 </head>
 
-<body class="hold-transition skin-blue-light sidebar-mini">
+<body class="hold-transition skin-blue-light sidebar-mini layout-boxed">
 
     <span id="notification" style="">
         <div id="notification_connectionDead" class="app-alert-item mod-error">Could not connect to SCP Server.<br>
@@ -620,6 +636,9 @@
                                         <span id="details3_name_surname"></span>
                                         <small id="details3_email"></small>
                                     </p>
+                                </li>
+                                <li class="user-body">
+                                <div class="form-group"><label class="control-sidebar-subheading"><input type="checkbox" data-layout="layout-boxed" class="pull-right"> Boxed Layout</label></div>
                                 </li>
                                 <li class="user-footer">
                                     <div class="pull-left">
@@ -792,7 +811,7 @@
                 window.innerHeight -
                 document.getElementsByClassName("main-header")[0].clientHeight -
                // document.getElementsByClassName("box-header")[0].clientHeight -
-                document.getElementsByClassName("box-footer")[0].clientHeight - 30
+                document.getElementsByClassName("box-footer")[0].clientHeight 
             ) + "px";
 
             var element = document.getElementById("message-container");
@@ -890,6 +909,7 @@
 
         // Conversation Functions
         function renderConversations(conversations) {
+            console.log("Render Conversation");
             // Loop through converations and create html elements and events
             conversations.reverse().forEach(function(element) {
                 // Loop through current conversations and remove existing conversations
@@ -983,6 +1003,7 @@
         }
 
         function populateConversations(foceconversationid=null) {
+            console.log("Populate Conversation");
             scpAPICall("conversations/list", function(response) {
                 conversations = JSON.parse(response).items;
 
@@ -1010,6 +1031,7 @@
 
                 // Start Conversation Polling
                 conversationPollTimer = setInterval(function() {
+                    console.log("populateConversations - Timer - renderConversations");
                     scpAPICall("conversations/list", function(response) {
                         conversations = JSON.parse(response).items;
 
@@ -1112,7 +1134,7 @@
                 var pushclass="";
                 var timeposition="";
                 if (user.flags ==1){
-                    timeposition="direct-chat-timestamp-left pull-left";
+                    timeposition="direct-chat-timestamp-left ";
                     if (message.user_id != repeatuserid) {
                         pushclass=" right"
                         
@@ -1120,7 +1142,7 @@
                         pushclass=" rightrepeat"                    
                     }
                 }else{
-                    timeposition="direct-chat-timestamp pull-right";
+                    timeposition="direct-chat-timestamp";
                     if (message.user_id != repeatuserid) {
                         pushclass="" 
                     }else{
@@ -1168,9 +1190,6 @@
                 if (message.type === "text") {
                     chatText.innerHTML = message.text.linkify();
                 }
-
-                chatText.innerHTML +="<span class='direct-chat-timestamp "+timeposition+"'>" + strftime('%H:%M', new Date(message.created * 1000))  + "</span>"
-
 
                 if (message.type === "file") {
                     var image = document.createElement("img");
@@ -1255,7 +1274,7 @@
                 }
 
                 chatContainer.appendChild(chatText);
-                
+                chatContainer.innerHTML +="<span class='direct-chat-timestamp "+timeposition+"'>" + strftime('%H:%M', new Date(message.created * 1000))  + "</span>"
                 
             });
 
@@ -1268,6 +1287,7 @@
         }
 
         function getAndRenderMessages(conversation) {
+            
             scpAPICall("conversation/messages", function(response) {
                 // Parse Response
                 response = JSON.parse(response);
@@ -1276,7 +1296,7 @@
                 if (response.items) {
                     // Update MSCT
                     MSCT = response.items[0].id;
-
+                    console.log("getAndRenderMessages");
                     // Render Messages
                     renderMessages(conversation, response);
                 }
@@ -1284,12 +1304,14 @@
         }
 
         function populateMessages(conversation) {
+            console.log("populateMessages");
             clearInterval(pollTimer);
             MSCT = 0;
 
             //getAndRenderMessages(conversation);
 
             pollTimer = setInterval(function() {
+                console.log("populateMessages - Timer - getAndRenderMessages");
                 getAndRenderMessages(conversation);
             }, 2000);
         }
@@ -1561,6 +1583,30 @@
             favicon.setAttribute('type', 'image/ico');
             favicon.setAttribute('href', img);
         }
+
+
+    (function ($, AdminLTE) {
+        function change_layout(cls) {
+            $("body").toggleClass(cls);
+            AdminLTE.layout.fixSidebar();
+            //Fix the problem with right sidebar and layout boxed
+            if (cls == "layout-boxed")
+              AdminLTE.controlSidebar._fix($(".control-sidebar-bg"));
+            if ($('body').hasClass('fixed') && cls == 'fixed') {
+              AdminLTE.pushMenu.expandOnHover();
+              AdminLTE.layout.activate();
+            }
+            AdminLTE.controlSidebar._fix($(".control-sidebar-bg"));
+            AdminLTE.controlSidebar._fix($(".control-sidebar"));
+          }
+
+        $("[data-layout]").on('click', function () {
+            change_layout($(this).data('layout'));
+        });
+    if ($('body').hasClass('layout-boxed')) {
+      $("[data-layout='layout-boxed']").attr('checked', 'checked');
+    }
+    })(jQuery, $.AdminLTE);
 
     </script>
 </body>

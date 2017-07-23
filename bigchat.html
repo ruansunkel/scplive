@@ -19,7 +19,12 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
     <style type="text/css">
-        
+        .box {
+            margin-bottom: 0px;
+        }
+        .box-footer {
+            padding: 5px 10px 5px 10px;
+        }
         .layout-boxed {
            background:none; 
         }
@@ -649,7 +654,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
+                        <li id="conv-userlist">
                             <a href="#" data-toggle="control-sidebar"><i class="fa fa-users"></i></a>
                         </li>
                     </ul>
@@ -797,7 +802,7 @@
     <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
 
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="dist/js/app.min.js"></script>
+    <script src="dist/js/app.js"></script>
     <script src="dist/js/pace.js"></script>
     <script type="text/javascript" src="plugins/jquery.autocomplete.js"></script>
     <!--<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>-->
@@ -807,37 +812,46 @@
     <!-- Resizing -->
     <script type="text/javascript">
         function resize() {
+
+            
+            // Message Window
             document.getElementsByClassName("direct-chat-messages")[0].style.height = (
                 window.innerHeight -
                 document.getElementsByClassName("main-header")[0].clientHeight -
-               // document.getElementsByClassName("box-header")[0].clientHeight -
-                document.getElementsByClassName("box-footer")[0].clientHeight 
+                document.getElementsByClassName("box-footer")[0].clientHeight -10
             ) + "px";
 
             var element = document.getElementById("message-container");
+            element.scrollTop = element.scrollHeight - element.clientHeight;
 
-            /*Side bar dynamic height for scroll*/
+            // Create message window
+            document.getElementById("mainconCreate").style.height = (
+                window.innerHeight -
+                document.getElementsByClassName("main-header")[0].clientHeight-5
+            ) + "px";
+
+            //Left Side bar dynamic height for scroll
             document.getElementsByClassName("treeview-menu")[0].style.height = (
-                window.innerHeight-
+                window.innerHeight -
                 document.getElementsByClassName("main-header")[0].clientHeight -
                 document.getElementsByClassName("btn-newConv")[0].clientHeight -
-                document.getElementsByClassName("sidebar-form")[0].clientHeight -95
-                
+                document.getElementsByClassName("sidebar-form")[0].clientHeight - 95
+
             ) + "px";
 
-             /*Side bar dynamic height for scroll*/
+            //Right Side bar dynamic height for scroll
             document.getElementsByClassName("control-sidebar-menu")[0].style.height = (
-                window.innerHeight-
-                document.getElementsByClassName("main-header")[0].clientHeight -100
-                
+                window.innerHeight -
+                document.getElementsByClassName("main-header")[0].clientHeight - 100
+
             ) + "px";
 
 
-            element.scrollTop = element.scrollHeight - element.clientHeight;
+            
         }
 
-        window.addEventListener("resize", function() {
-            setTimeout(function() {
+        window.addEventListener("resize", function () {
+            setTimeout(function () {
                 resize();
             }, 200);
         }, false);
@@ -909,7 +923,7 @@
 
         // Conversation Functions
         function renderConversations(conversations) {
-            console.log("Render Conversation");
+            //console.log("Render Conversation");
             // Loop through converations and create html elements and events
             conversations.reverse().forEach(function(element) {
                 // Loop through current conversations and remove existing conversations
@@ -924,17 +938,13 @@
                 li.setAttribute("class", "conversation-list-li");
                 li.setAttribute("conversation-id", element.id);
                 document.getElementById("conversation-container").insertBefore(li, document.getElementById("conversation-container").firstChild);
-                //document.getElementById("conversation-container").appendChild(li);
                 var href = document.createElement("a");
                 href.setAttribute("href", "#");
                 li.appendChild(href);
-                //if ((element.flags & 16) === 16) {
-                //    href.innerHTML = "<i class='fa fa-circle-o'></i>" + element.users[Object.keys(element.users)];
-                //} else {
-                //    href.innerHTML = "<i class='fa fa-circle-o'></i>" + element.subject;
-                //}
+
                 var convImg;
                 var convSubject;
+                console.log("Flags: " +element.flags );
                 if ((element.flags & 16) === 16) {
                     convImg = "https://scp.pfortner.co.za/media/avatar/" + Object.keys(element.users) + "/48x48";
                     convSubject = element.users[Object.keys(element.users)];
@@ -944,7 +954,7 @@
                 }
                 //*************************************////*************************************//
                 if ((element.flags & 1) === 1) {
-                    console.log("Change icon");
+                    console.log("Change icon" );
                     change_favicon('faviconalert.ico');
                     li.classList.add("unread");
                 }
@@ -983,11 +993,12 @@
                     conversationId = element.id;
                     if (window.outerWidth <767){
                         $('body').removeClass("sidebar-open");
-                        $('body').addClass("sidebar-collapse");
+                       // $('body').addClass("sidebar-collapse");
                     }
                     if (document.getElementById("mainconCreate").style.display == ""){
                         document.getElementById("mainchatBox").style.display = ""
                         document.getElementById("mainconCreate").style.display = "none"
+                        document.getElementById("conv-userlist").style.display = ""
                     }
                 }
 
@@ -1003,7 +1014,7 @@
         }
 
         function populateConversations(foceconversationid=null) {
-            console.log("Populate Conversation");
+            //console.log("Populate Conversation");
             scpAPICall("conversations/list", function(response) {
                 conversations = JSON.parse(response).items;
 
@@ -1015,7 +1026,7 @@
                             TIMESTAMP = conversation.created + 1;
                         }
                     });
-                    console.log(conversations);
+                    //console.log(conversations);
                    // if (foceconversationid==null){
                         populateMessages(conversations[0]);
                         conversationId = conversations[0].id;
@@ -1031,7 +1042,7 @@
 
                 // Start Conversation Polling
                 conversationPollTimer = setInterval(function() {
-                    console.log("populateConversations - Timer - renderConversations");
+                    //console.log("populateConversations - Timer - renderConversations");
                     scpAPICall("conversations/list", function(response) {
                         conversations = JSON.parse(response).items;
 
@@ -1042,7 +1053,7 @@
                                     TIMESTAMP = conversation.created + 1;
                                 }
                             });
-
+                            console.log("new messages found");
                             renderConversations(conversations);
                         }
                     }, "ps=10&pg=1&op=16&ts=" + TIMESTAMP);
@@ -1054,7 +1065,7 @@
 
         // Message Functions
         function renderMessages(conversation, messagesResponse) {
-            console.log("write message");
+            //console.log("write message");
             // set overlay
             var messageovelay = document.getElementById("message-loading-overlay");
             messageovelay.setAttribute("class", "overlay");
@@ -1063,11 +1074,9 @@
 
             // Set Conversation Title
             if ((conversation.flags & 16) === 16) {
-               // document.getElementById("conversation-title").innerHTML = "Direct Chat";
                 document.getElementById("conversation-title-bar").innerHTML = "Direct Chat";
             } else {
-               // document.getElementById("conversation-title").innerHTML = conversation.subject;
-                document.getElementById("conversation-title-bar").innerHTML = conversation.subject;
+                document.getElementById("conversation-title-bar").innerHTML = "<strong>"+conversation.subject+"</strong>";
             }
 
             // Set Participants - Right Sidebar
@@ -1079,31 +1088,34 @@
                 }
                 response.users.forEach(function(userdet) {
 
-                usersideContainer = document.createElement("li");
-                usersideContainer.setAttribute("style", "padding-left: 15px;");
-                document.getElementById("sidebar-users").appendChild(usersideContainer);
+                    usersideContainer = document.createElement("li");
+                    usersideContainer.setAttribute("style", "padding-left: 15px;");
+                    document.getElementById("sidebar-users").appendChild(usersideContainer);
 
-                usersideLink = document.createElement("a");
-                usersideLink.setAttribute("href", "javascript:void(0)");
-                usersideContainer.appendChild(usersideLink);
+                    usersideLink = document.createElement("a");
+                    usersideLink.setAttribute("href", "javascript:void(0)");
+                    usersideContainer.appendChild(usersideLink);
 
-                usersideAvatar = document.createElement("img");
-                usersideAvatar.setAttribute("class", "direct-chat-img");
-                usersideAvatar.setAttribute("src", "https://scp.pfortner.co.za/media/avatar/" + userdet.id + "/40x40");
-                usersideLink.appendChild(usersideAvatar);
+                    usersideAvatar = document.createElement("img");
+                    usersideAvatar.setAttribute("class", "direct-chat-img");
+                    usersideAvatar.setAttribute("src", "https://scp.pfortner.co.za/media/avatar/" + userdet.id + "/40x40");
+                    usersideLink.appendChild(usersideAvatar);
 
-                usersideDiv = document.createElement("div");
-                usersideDiv.setAttribute("class", "menu-info");
-                usersideLink.appendChild(usersideDiv);
+                    usersideDiv = document.createElement("div");
+                    usersideDiv.setAttribute("class", "menu-info");
+                    usersideLink.appendChild(usersideDiv);
 
-                usersideName = document.createElement("h4");
-                usersideName.setAttribute("class", "control-sidebar-subheading");
-                usersideDiv.appendChild(usersideName);
+                    usersideName = document.createElement("h4");
+                    usersideName.setAttribute("class", "control-sidebar-subheading");
+                    usersideDiv.appendChild(usersideName);
 
-                usersideP = document.createElement("p");
-                usersideDiv.appendChild(usersideP);
+                    usersideP = document.createElement("p");
+                    usersideDiv.appendChild(usersideP);
 
-                usersideName.innerHTML = userdet.name;
+                    usersideName.innerHTML = userdet.name;
+                    if ((conversation.flags & 16) === 16) {
+                        document.getElementById("conversation-title-bar").innerHTML += " - <strong>" + userdet.name + "</strong>";
+                    }
                     });
 
 
@@ -1188,7 +1200,7 @@
                 chatText.setAttribute("class", "direct-chat-text");
                 chatText.setAttribute("style", " word-break: break-word;");
                 if (message.type === "text") {
-                    chatText.innerHTML = message.text.linkify();
+                    chatText.innerHTML = message.text.linkify().replace(/\n/g, "<br />");
                 }
 
                 if (message.type === "file") {
@@ -1296,7 +1308,7 @@
                 if (response.items) {
                     // Update MSCT
                     MSCT = response.items[0].id;
-                    console.log("getAndRenderMessages");
+                    //console.log("getAndRenderMessages");
                     // Render Messages
                     renderMessages(conversation, response);
                 }
@@ -1304,14 +1316,14 @@
         }
 
         function populateMessages(conversation) {
-            console.log("populateMessages");
+            //console.log("populateMessages");
             clearInterval(pollTimer);
             MSCT = 0;
 
             //getAndRenderMessages(conversation);
 
             pollTimer = setInterval(function() {
-                console.log("populateMessages - Timer - getAndRenderMessages");
+                //console.log("populateMessages - Timer - getAndRenderMessages");
                 getAndRenderMessages(conversation);
             }, 2000);
         }
@@ -1428,9 +1440,11 @@
 
                 document.getElementById("mainchatBox").style.display = "none"
                 document.getElementById("mainconCreate").style.display = ""
+                document.getElementById("conv-userlist").style.display = "none"
+
                 if (window.outerWidth <767){
                     $('body').removeClass("sidebar-open");
-                    $('body').addClass("sidebar-collapse");
+                   // $('body').addClass("sidebar-collapse");
                 }
                 document.getElementById("sidebar-users").innerHTML="";
             };
@@ -1488,7 +1502,7 @@
 
                     },"qs=" + query + "&op=0",false);
 
-                    console.log(result);
+                    //console.log(result);
                     done(result);
                 },
                 groupBy: 'category',
@@ -1526,16 +1540,16 @@
                 });
 
                 querystring+="&flags:0"
-                console.log(querystring);
+                //console.log(querystring);
 
                 scpAPICall("conversation/create", function(response) {
-                        console.log(response);
+                        //console.log(response);
                         if (response!=""){
                             document.getElementById("conversation-container").innerHTML="";
                             populateConversations(response);
                             document.getElementById("mainchatBox").style.display = "";
                             document.getElementById("mainconCreate").style.display = "none";
-
+                            document.getElementById("conv-userlist").style.display = ""
                         }
 
                     },encodeURI(querystring));

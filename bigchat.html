@@ -975,7 +975,7 @@
                 convDiv.appendChild(convDivTxt);
 
                     
-                convDivTxt.innerHTML=convSubject+"<span style='display: block;color: #444; font-size: 12px; white-space:pre-line; width:230px; word-break: break-word;'>"+element.value.substring(0,70)+"</span>"
+                convDivTxt.innerHTML=convSubject+"<span style='display: block;color: #444; font-size: 12px; white-space:pre-line; width:230px; word-break: break-word;'>"+element.value.substring(0,63)+"</span>"
 
 
                 // Set click listener
@@ -1008,7 +1008,9 @@
             // Set selected conversation
             for (var i = 0; i < document.getElementById("conversation-container").children.length; i++) {
                 if (parseInt(document.getElementById("conversation-container").children[i].getAttribute("conversation-id")) === conversationId) {
-                    document.getElementById("conversation-container").children[i].setAttribute("class", "conversation-list-li conversation-list-active");
+                    document.getElementById("conversation-container").children[i].classList.add("conversation-list-active");
+                    
+                    //setAttribute("class", "conversation-list-li conversation-list-active");
                 }
             }
         }
@@ -1210,7 +1212,6 @@
                     image.setAttribute("style", "cursor: pointer;");
                     image.src = message.text.split("|")[1];
                     image.src = "https://scp.pfortner.co.za/request/api/conversation/attachment?id=" + conversation.id + "&mi=" + message.id + "&op=1";
-                    
 
                     chatText.appendChild(image);
                     chatText.style.minHeight = "100px";
@@ -1219,16 +1220,15 @@
                     var filetype = message.text.split("|")[1].split('.').pop();
                     switch( filetype.toLowerCase() ) {
                         case "jpg": case "png": case "jpeg":
-
                             //Modal Image
                             chatText.onclick = function() {
-                                //alert(image.src);
+                                console.log("CLick image");
                                 mymodalimg = document.getElementById("idimagepreview");
                                 mymodalimg.setAttribute("src","https://scp.pfortner.co.za/request/api/conversation/attachment?id=" + conversation.id + "&mi=" + message.id);
                                 mymodalimgdescrip = document.getElementById("imagedescrip");
                                 mymodalimg.setAttribute("style", "max-height:"+(window.innerHeight-80)+"px;");
 			                    $('#imagemodal').modal('show'); 
-                            }
+                            };
                           break;
                         case "mov": case "mp4":
                             chatText.innerHTML = `

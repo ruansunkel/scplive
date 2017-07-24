@@ -769,6 +769,7 @@
 				Array.prototype.forEach.call(document.getElementsByClassName("conversation-list-active"), function(element) {
 					element.classList.remove("unread");
 				});
+				change_favicon('favicon.ico');
             }
 
             document.getElementById("text-input").onkeyup = function(evt) {
@@ -781,6 +782,7 @@
 					Array.prototype.forEach.call(document.getElementsByClassName("conversation-list-active"), function(element) {
 						element.classList.remove("unread");
 					});
+					change_favicon('favicon.ico');
                 }
             }
         }

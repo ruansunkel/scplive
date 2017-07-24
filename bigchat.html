@@ -399,6 +399,11 @@
 
                 // Set click listener
                 href.onclick = function() {
+					// If current active conversation had unread marker, remove it
+					Array.prototype.forEach.call(document.getElementsByClassName("conversation-list-active"), function(element) {
+						element.classList.remove("unread");
+					});
+
                     $("#conversation-container>li.conversation-list-active").removeClass("conversation-list-active");
 
                     document.getElementById("message-container").innerHTML = "";

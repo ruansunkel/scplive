@@ -631,12 +631,12 @@
                     <ul class="nav navbar-nav">
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="https://scp.pfortner.co.za/media/avatar/0/80x80" class="user-image" alt="User Image">
+                                <img src="https://dcx.pfortner.co.za/media/avatar/0/80x80" class="user-image" alt="User Image">
                                 <span class="hidden-xs" id="details2_name_surname"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="user-header">
-                                    <img src="https://scp.pfortner.co.za/media/avatar/0/80x80" class="img-circle" alt="User Image">
+                                    <img src="https://dcx.pfortner.co.za/media/avatar/0/80x80" class="img-circle" alt="User Image">
                                     <p>
                                         <span id="details3_name_surname"></span>
                                         <small id="details3_email"></small>
@@ -863,7 +863,7 @@
 
     <!-- SCP API Calls -->
     <script type="text/javascript" name="SCP API Calls">
-        var DOMAIN = "scp.pfortner.co.za";
+        var DOMAIN = "dcx.pfortner.co.za";
 
         // Globals
         var MSCT = 0;
@@ -946,10 +946,10 @@
                 var convSubject;
                 console.log("Flags: " +element.flags );
                 if ((element.flags & 16) === 16) {
-                    convImg = "https://scp.pfortner.co.za/media/avatar/" + Object.keys(element.users) + "/48x48";
+                    convImg = "https://dcx.pfortner.co.za/media/avatar/" + Object.keys(element.users) + "/48x48";
                     convSubject = element.users[Object.keys(element.users)];
                 } else {
-                    convImg = "https://scp.pfortner.co.za/assets/defaults/group.png";
+                    convImg = "https://dcx.pfortner.co.za/assets/defaults/group.png";
                     convSubject = element.subject;
                 }
                 //*************************************////*************************************//
@@ -1100,7 +1100,7 @@
 
                     usersideAvatar = document.createElement("img");
                     usersideAvatar.setAttribute("class", "direct-chat-img");
-                    usersideAvatar.setAttribute("src", "https://scp.pfortner.co.za/media/avatar/" + userdet.id + "/40x40");
+                    usersideAvatar.setAttribute("src", "https://dcx.pfortner.co.za/media/avatar/" + userdet.id + "/40x40");
                     usersideLink.appendChild(usersideAvatar);
 
                     usersideDiv = document.createElement("div");
@@ -1190,7 +1190,7 @@
                         //new Date(message.created * 1000).toLocaleDateString("en-ZA", options)
                         chatAvatar = document.createElement("img");
                         chatAvatar.setAttribute("class", "direct-chat-img direct-chat-img-message");
-                        chatAvatar.setAttribute("src", "https://scp.pfortner.co.za/media/avatar/" + message.user_id + "/30x30");
+                        chatAvatar.setAttribute("src", "https://dcx.pfortner.co.za/media/avatar/" + message.user_id + "/30x30");
                         chatAvatar.innerHTML = message.created;
                         chatContainer.appendChild(chatAvatar);
 
@@ -1211,7 +1211,7 @@
                     image.setAttribute("id", "imgid-"+message.id);
                     image.setAttribute("style", "cursor: pointer;");
                     image.src = message.text.split("|")[1];
-                    image.src = "https://scp.pfortner.co.za/request/api/conversation/attachment?id=" + conversation.id + "&mi=" + message.id + "&op=1";
+                    image.src = "https://dcx.pfortner.co.za/request/api/conversation/attachment?id=" + conversation.id + "&mi=" + message.id + "&op=1";
 
                     chatText.appendChild(image);
                     chatText.style.minHeight = "100px";
@@ -1224,7 +1224,7 @@
                             chatText.onclick = function() {
                                 console.log("CLick image");
                                 mymodalimg = document.getElementById("idimagepreview");
-                                mymodalimg.setAttribute("src","https://scp.pfortner.co.za/request/api/conversation/attachment?id=" + conversation.id + "&mi=" + message.id);
+                                mymodalimg.setAttribute("src","https://dcx.pfortner.co.za/request/api/conversation/attachment?id=" + conversation.id + "&mi=" + message.id);
                                 mymodalimgdescrip = document.getElementById("imagedescrip");
                                 mymodalimg.setAttribute("style", "max-height:"+(window.innerHeight-80)+"px;");
 			                    $('#imagemodal').modal('show'); 
@@ -1233,22 +1233,22 @@
                         case "mov": case "mp4":
                             chatText.innerHTML = `
 								<video  controls style="width: 250px" >
-									<source src="` + "https://scp.pfortner.co.za/request/api/conversation/attachment?id="+conversation.id+"&mi="+message.id + `" type="video/mp4">
+									<source src="` + "https://dcx.pfortner.co.za/request/api/conversation/attachment?id="+conversation.id+"&mi="+message.id + `" type="video/mp4">
 								</video>
 							`;
                           break;
                         case "mp3": case "wav": 
                             chatText.innerHTML = `
 								<audio controls style="width: 250px">
-									<source src="` + "https://scp.pfortner.co.za/request/api/conversation/attachment?id="+conversation.id+"&mi="+message.id + `" >
+									<source src="` + "https://dcx.pfortner.co.za/request/api/conversation/attachment?id="+conversation.id+"&mi="+message.id + `" >
 								</audio>
 							`;
                           break;
                         default:
                             //Download file
                             chatText.onclick = function() {
-                                window.open("https://scp.pfortner.co.za/request/api/conversation/attachment?id="+conversation.id+"&mi="+message.id, "_blank");
-                                //window.location.href = "https://scp.pfortner.co.za/request/api/conversation/attachment?id="+conversation.id+"&mi="+message.id;
+                                window.open("https://dcx.pfortner.co.za/request/api/conversation/attachment?id="+conversation.id+"&mi="+message.id, "_blank");
+                                //window.location.href = "https://dcx.pfortner.co.za/request/api/conversation/attachment?id="+conversation.id+"&mi="+message.id;
                             }
                       } 
                 }
@@ -1256,15 +1256,15 @@
 
                 if (message.type === "audr") {
                     if (message.text.split("|")[1]) {
-                        chatText.innerHTML += "<img src='https://scp.pfortner.co.za/assets/icons/phone.png' style='width: 20px'/> " + user.name + " established a call with " + message.text.split("|")[2];
+                        chatText.innerHTML += "<img src='https://dcx.pfortner.co.za/assets/icons/phone.png' style='width: 20px'/> " + user.name + " established a call with " + message.text.split("|")[2];
 
                         chatText.innerHTML += `<br/><br />
 								<audio controls style="width: 250px">
-									<source src="` + "https://scp.pfortner.co.za/media/recording/" + message.text.split("|")[1] + `" type="audio/mp3">
+									<source src="` + "https://dcx.pfortner.co.za/media/recording/" + message.text.split("|")[1] + `" type="audio/mp3">
 								</audio>
 							`;
                     } else {
-                        chatText.innerHTML += "<img src='https://scp.pfortner.co.za/assets/icons/phonerr.png' style='width: 20px'/> " + user.name + " attempted a call with " + message.text.split("|")[2];
+                        chatText.innerHTML += "<img src='https://dcx.pfortner.co.za/assets/icons/phonerr.png' style='width: 20px'/> " + user.name + " attempted a call with " + message.text.split("|")[2];
                     }
                 }
 

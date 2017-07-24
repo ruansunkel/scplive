@@ -7,60 +7,21 @@
         .layout-boxed {
            background:none; 
         }
-        .btn-newConv {
-            border-radius: 3px;
-            position: relative;
-            margin: 10px 0 0 0;
-            min-width: 100%;
-            height: 35px;
-            text-align: center;
-            color: #666;
-            border: 1px solid #ddd;
-            background-color: #ccc;
-            font-size: 14px;
-            font-weight: 600;
-        }
+
         .direct-chat-messages{
             
             overflow-y: scroll; /* has to be scroll, not auto */
             -webkit-overflow-scrolling: touch;
         }
         
-        .direct-chat-warning .right>.direct-chat-text:after,
-        .direct-chat-warning .right>.direct-chat-text:before {
-            border-left-color: #5EA5CF;
-        }
-
-        .direct-chat-warning .rightrepeat>.direct-chat-text:after,
-        .direct-chat-warning .rightrepeat>.direct-chat-text:before {
-                border: none transparent;
-        }        
+    
         
         .direct-chat-warning .leftrepeat>.direct-chat-text:after,
         .direct-chat-warning .leftrepeat>.direct-chat-text:before {
                 border: none transparent;
         }    
         
-        .direct-chat-warning .right>.direct-chat-text {
-            background: #5EA5CF;
-            border-color: #5EA5CF;
-            color: #fff;
-            text-align: right;
-            float: right;
-            
-            max-width: 80%;
-        }
-        .direct-chat-warning .rightrepeat>.direct-chat-text {
-            background: #5EA5CF;
-            border-color: #5EA5CF;
-            color: #fff;
-            text-align: right;
-            float: right;
-            /*width: 74%;*/
-            max-width: 80%;
-            margin-right: 40px;
-            margin-left: 0;
-        }        
+   
         .right .direct-chat-text {
             margin-right: 10px;
             margin-left: 0;
@@ -132,27 +93,6 @@
 
         }
 
-        .conversation-list-li {
-            height: 70px;
-            padding-top: 6px;
-            border-bottom: 1px solid #f1f1f1;
-        }
-        
-        .conversation-list-li:hover {
-            background-color: #75D26B;
-            color: #fff;
-        }
-        
-        .conversation-list-active {
-            background-color: #4CB741;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            border-bottom: 0px solid #f1f1f1;
-        }
-        
-        .skin-blue-light .treeview-menu>li>a:hover {
-            color: #fff;
-        }
-        
         .treeview-menu li.conversation-list-active>a {
             color: #fff;
         }
@@ -412,7 +352,7 @@
                 background-color: #61BD4F;
                 border-color: #D6ECD2
             }
-                    .big-message {
+            .big-message {
                 display: block;
                 margin: 75px auto;
                 text-align: center;
@@ -564,9 +504,7 @@
                 border-bottom: 1px solid #000;
             }
 
-            .unread {
-                border-right: 10px solid #f39c12;
-            }
+
         
             input[type="file"] {
                 display: none;

@@ -285,6 +285,7 @@
         var pollTimer = 0;
         var conversationPollTimer = 0;
         var conversationId = 0;
+		var lastMessage = "";
 
         function scpAPICall(api, callback, data = null, Synchro=true) {
             
@@ -374,9 +375,11 @@
                 }
 
 				// Always show unread marker when conversation has been updated
-				if (MSCT > 0) { 
-					change_favicon('faviconalert.ico');
-					li.classList.add("unread");
+				if (MSCT > 0) {
+					if (element.value !== lastMessage) {
+						change_favicon('faviconalert.ico');
+						li.classList.add("unread");
+					}
 				}
 
                 var convDiv = document.createElement("div");
@@ -759,6 +762,7 @@
                 }
 
                 scpAPICall("conversation/post", function() {}, "id=" + conversationId + "&text=" + document.getElementById("text-input").value);
+				lastMessage = document.getElementById("text-input").value;
                 document.getElementById("text-input").value = "";
 
 				// If current active conversation had unread marker, remove it
@@ -770,6 +774,7 @@
             document.getElementById("text-input").onkeyup = function(evt) {
                 if (evt.keyCode == 13) {
                     scpAPICall("conversation/post", function() {}, "id=" + conversationId + "&text=" + document.getElementById("text-input").value);
+					lastMessage = document.getElementById("text-input").value;
                     document.getElementById("text-input").value = "";
 
 					// If current active conversation had unread marker, remove it

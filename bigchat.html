@@ -373,6 +373,10 @@
                     li.classList.add("unread");
                 }
 
+				// Always show unread marker when conversation has been updated
+				if (MSCT > 0) { 
+					li.classList.add("unread");
+				}
 
                 var convDiv = document.createElement("div");
                 href.appendChild(convDiv);

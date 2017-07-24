@@ -760,12 +760,22 @@
 
                 scpAPICall("conversation/post", function() {}, "id=" + conversationId + "&text=" + document.getElementById("text-input").value);
                 document.getElementById("text-input").value = "";
+
+				// If current active conversation had unread marker, remove it
+				Array.prototype.forEach.call(document.getElementsByClassName("conversation-list-active"), function(element) {
+					element.classList.remove("unread");
+				});
             }
 
             document.getElementById("text-input").onkeyup = function(evt) {
                 if (evt.keyCode == 13) {
                     scpAPICall("conversation/post", function() {}, "id=" + conversationId + "&text=" + document.getElementById("text-input").value);
                     document.getElementById("text-input").value = "";
+
+					// If current active conversation had unread marker, remove it
+					Array.prototype.forEach.call(document.getElementsByClassName("conversation-list-active"), function(element) {
+						element.classList.remove("unread");
+					});
                 }
             }
         }

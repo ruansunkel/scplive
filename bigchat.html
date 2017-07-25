@@ -556,9 +556,18 @@
                 resize();
             }, "id=" + conversation.id, true);
 
+			// Create Message List
+			var currentMessageList = Array.prototype.map.call(document.getElementById("message-container").children, function(element) {
+				return element.getAttribute("message-id");
+			});
+
             var repeatuserid =0;
             var MessageDateCheck="";
             messagesResponse.items.reverse().forEach(function(message) {
+				if(currentMessageList.indexOf(String(message.id)) > -1) {
+					return;
+				}
+
                 var user = messagesResponse.users.find(function(user) {
                     return user.id === message.user_id;
                 });

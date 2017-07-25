@@ -586,7 +586,7 @@
                 var pushclass="";
                 var timeposition="";
                 if (user.flags ==1){
-                    timeposition="direct-chat-timestamp-left ";
+                    timeposition="direct-chat-timestamp-left";
                     if (message.user_id != repeatuserid) {
                         pushclass=" right"
                         
@@ -725,8 +725,11 @@
                 }
 
                 chatContainer.appendChild(chatText);
-                chatContainer.innerHTML +="<span class='direct-chat-timestamp "+timeposition+"'>" + strftime('%H:%M', new Date(message.created * 1000))  + "</span>"
-                
+				var date = document.createElement("span");
+				date.classList.add("direct-chat-timestamp");
+				date.classList.add(timeposition);
+				date.innerHTML = strftime('%H:%M', new Date(message.created * 1000));
+				chatContainer.appendChild(date);
             });
 
             // Clear overlay

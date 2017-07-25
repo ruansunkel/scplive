@@ -653,12 +653,13 @@
                     image.src = "https://dcx.pfortner.co.za/request/api/conversation/attachment?id=" + conversation.id + "&mi=" + message.id + "&op=1";
 
                     chatText.appendChild(image);
-                    chatText.style.minHeight = "210px";
+                    chatText.style.minHeight = "120px";
                     chatText.innerHTML += "<br />" + message.text.split("|")[1];
                     chatText.innerHTML += "<br />" + message.text.split("|")[0];
                     var filetype = message.text.split("|")[1].split('.').pop();
                     switch( filetype.toLowerCase() ) {
                         case "jpg": case "png": case "jpeg":
+							chatText.style.minHeight = "210px";
                             //Modal Image
                             chatText.onclick = function() {
                                 console.log("CLick image");
@@ -670,6 +671,7 @@
                             };
                           break;
                         case "mov": case "mp4":
+							chatText.style.minHeight = "210px";
                             chatText.innerHTML = `
 								<video  controls style="width: 250px" >
 									<source src="` + "https://dcx.pfortner.co.za/request/api/conversation/attachment?id="+conversation.id+"&mi="+message.id + `" type="video/mp4">

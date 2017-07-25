@@ -5,7 +5,8 @@
             padding: 5px 10px 5px 10px;
         }
         .layout-boxed {
-           background:none; 
+          /* background:none;
+            background: url("../../images/background1.jpg") repeat fixed; */
         }
 
         .direct-chat-messages{

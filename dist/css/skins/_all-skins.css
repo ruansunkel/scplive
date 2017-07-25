@@ -2,6 +2,9 @@
  * Skin: Blue
  * ----------
  */
+.skin-blue  {
+    background: url("../../../images/background8.jpg") repeat fixed;
+}
 
 .skin-blue .direct-chat-warning .right>.direct-chat-text {
             background: #80919a;
@@ -226,6 +229,9 @@
  * ---------------------------------------------------------------------------------------------------
  */
 
+.skin-blue-light  {
+    background: url("../../../images/background1.jpg") repeat fixed;
+}
 .skin-blue-light .direct-chat-warning .right>.direct-chat-text {
             background: #5EA5CF;
             border-color: #5EA5CF;
@@ -470,7 +476,9 @@
  */
 /* skin-black navbar */
 
-
+.skin-black  {
+    background: url("../../../images/background10.jpg") repeat fixed;
+}
 .skin-black .direct-chat-warning .right>.direct-chat-text {
             background: #80919a;
             border-color: #80919a;
@@ -708,7 +716,9 @@
  * -----------
  */
 /* skin-black navbar */
-
+.skin-black-light  {
+    background: url("../../../images/background4.jpg") repeat fixed;
+}
 .skin-black-light .direct-chat-warning .right>.direct-chat-text {
             background: #5EA5CF;
             border-color: #5EA5CF;
@@ -959,7 +969,9 @@
  * Skin: Green
  * -----------
  */
-
+.skin-green  {
+    background: url("../../../images/background10.jpg") repeat fixed;
+}
 
 .skin-green .direct-chat-warning .right>.direct-chat-text {
             background: #80919a;
@@ -1173,7 +1185,9 @@
  * -----------
  */
 
-
+.skin-green-light  {
+    background: url("../../../images/background5.png") repeat fixed;
+}
 .skin-green-light .direct-chat-warning .right>.direct-chat-text {
             background: #5EA5CF;
             border-color: #5EA5CF;
@@ -1406,7 +1420,9 @@
  * ---------
  */
 
-
+.skin-red  {
+    background: url("../../../images/background8.jpg") repeat fixed;
+}
 .skin-red .direct-chat-warning .right>.direct-chat-text {
             background: #80919a;
             border-color: #80919a;
@@ -1619,7 +1635,9 @@
  * Skin: Red light
  * ---------
  */
-
+.skin-red-light  {
+    background: url("../../../images/background11.jpg") repeat fixed;
+}
 .skin-red-light .direct-chat-warning .right>.direct-chat-text:after, .direct-chat-warning .right>.direct-chat-text:before {
     border-left-color: #e0dddc;
 }
@@ -1856,7 +1874,9 @@
  * ------------
  */
 
-
+.skin-yellow  {
+    background: url("../../../images/background6.gif") repeat fixed;
+}
 
 .skin-yellow .direct-chat-warning .right>.direct-chat-text {
             background: #80919a;
@@ -2070,7 +2090,9 @@
  * Skin: Yellow Light
  * ------------
  */
-
+.skin-yellow-light  {
+    background: url("../../../images/background9.png") repeat fixed;
+}
 
 .skin-yellow-light .direct-chat-warning .right>.direct-chat-text {
             background: #5EA5CF;

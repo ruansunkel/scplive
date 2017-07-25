@@ -595,6 +595,7 @@
                 
                 chatContainer = document.createElement("div");
                 chatContainer.setAttribute("class", "direct-chat-msg" + pushclass);
+				chatContainer.setAttribute("message-id", message.id);
                 document.getElementById("message-container").appendChild(chatContainer);
 
                 if (message.type != "addu" && message.type != "addg") {

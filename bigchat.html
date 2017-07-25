@@ -737,7 +737,7 @@
             messagespinner.setAttribute("class", "");
 
             var element = document.getElementById("message-container");
-            element.scrollTop = element.scrollHeight - element.clientHeight;
+			element.scrollTop = Number.MAX_SAFE_INTEGER;
         }
 
         function getAndRenderMessages(conversation) {

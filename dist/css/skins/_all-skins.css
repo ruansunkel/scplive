@@ -1721,7 +1721,7 @@
             }
 
 .skin-red-light .main-header .navbar {
-  background-color: #dd4b39;
+  background-color: #9f1d29;
 }
 .skin-red-light .main-header .navbar .nav > li > a {
   color: #ffffff;
@@ -1919,7 +1919,7 @@
         }
 
 .skin-yellow .conversation-list-active {
-            background-color: #da9527;
+            background-color: #cab44b;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             border-bottom: 0px solid #f1f1f1;
         }
@@ -1960,7 +1960,7 @@
 
 
 .skin-yellow .main-header .navbar {
-  background-color: #f39c12;
+  background-color: #cab44b;
 }
 .skin-yellow .main-header .navbar .nav > li > a {
   color: #ffffff;
@@ -2095,8 +2095,8 @@
 }
 
 .skin-yellow-light .direct-chat-warning .right>.direct-chat-text {
-            background: #5EA5CF;
-            border-color: #5EA5CF;
+            background: #80919a;
+            border-color: #80919a;
             color: #fff;
             text-align: right;
             float: right;
@@ -2104,8 +2104,8 @@
             max-width: 80%;
         }
 .skin-yellow-light  .direct-chat-warning .rightrepeat>.direct-chat-text {
-            background: #5EA5CF;
-            border-color: #5EA5CF;
+            background: #80919a;
+            border-color: #80919a;
             color: #fff;
             text-align: right;
             float: right;
@@ -2117,7 +2117,7 @@
    
 .skin-yellow-light .direct-chat-warning .right>.direct-chat-text:after,
         .direct-chat-warning .right>.direct-chat-text:before {
-            border-left-color: #5EA5CF;
+            border-left-color: #80919a;
         }
 
 .skin-yellow-light .direct-chat-warning .rightrepeat>.direct-chat-text:after,
@@ -2135,7 +2135,7 @@
         }
 
 .skin-yellow-light .conversation-list-active {
-            background-color: #f39c12;
+            background-color: #dac82a;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             border-bottom: 0px solid #f1f1f1;
         }
@@ -2173,7 +2173,7 @@
             }
 
 .skin-yellow-light .main-header .navbar {
-  background-color: #f39c12;
+  background-color: #dac82a;
 }
 .skin-yellow-light .main-header .navbar .nav > li > a {
   color: #ffffff;

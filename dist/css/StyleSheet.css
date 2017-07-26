@@ -519,3 +519,7 @@
                 vertical-align: top;
                 width: 120px;
             }
+        
+        .sidebar {
+            padding-bottom: 0px;
+        }

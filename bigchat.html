@@ -96,11 +96,13 @@
                             <span>CONVERSATIONS</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
-                        <ul class="treeview-menu" id="conversation-container" style="overflow-y: scroll;-webkit-overflow-scrolling: touch;">
+                        <ul class="treeview-menu" id="conversation-container" style="overflow-y: overlay;-webkit-overflow-scrolling: touch;">
                         </ul>
                     </li>
                 </ul>
+                
             </section>
+            <div class="powered-by" style="background-color: #fff; text-align: center;">Secured and powered by <br><img src="images/pfortner.png"></div>
             <!-- /.sidebar -->
         </aside>
 
@@ -251,7 +253,8 @@
                 window.innerHeight -
                 document.getElementsByClassName("main-header")[0].clientHeight -
                 document.getElementsByClassName("btn-newConv")[0].clientHeight -
-                document.getElementsByClassName("sidebar-form")[0].clientHeight - 95
+                document.getElementsByClassName("powered-by")[0].clientHeight -
+                document.getElementsByClassName("sidebar-form")[0].clientHeight - 85
 
             ) + "px";
 

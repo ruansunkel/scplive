@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>DCX SCP</title>
+    <title>UCsecure</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -19,7 +19,7 @@
   <![endif]-->
 </head>
 
-<body class="hold-transition skin-blue-light sidebar-mini layout-boxed">
+<body class="hold-transition skin-purple  sidebar-mini layout-boxed">
 
     <span id="notification" style="">
         <div id="notification_connectionDead" class="app-alert-item mod-error">Could not connect to SCP Server.<br>
@@ -34,8 +34,8 @@
             <!-- Logo -->
             <a href="bigchat.html" class="logo hidden-xs" style="background-color: #fff;">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>DCX</b></span>
-                <span class="logo-lg" style="background-color: #fff;"><img src="Images/DCXLogo.jpg" border="0"></span>
+                <span class="logo-mini"><b>UCsecure</b></span>
+                <span class="logo-lg" style="background-color: #fff;"><img src="Images/GTlogo.jpg" border="0" width="80%"></span>
             </a>
             <nav class="navbar navbar-static-top">
                 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -93,14 +93,31 @@
 
                     <li class="active treeview">
                         <a href="#">
+                            <i class="fa fa-users"></i>
                             <span>CONVERSATIONS</span>
                             <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                         </a>
                         <ul class="treeview-menu" id="conversation-container" style="overflow-y: overlay;-webkit-overflow-scrolling: touch;">
                         </ul>
                     </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-user"></i>
+                            <span>DIRECT CHATS</span>
+                            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                        </a>
+                        <ul class="treeview-menu" id="direct-chats-container" style="overflow-y: overlay;-webkit-overflow-scrolling: touch;">
+                        </ul>
+                    </li>
+                    <li >
+                        <a href="#">
+                            <i class="fa fa-file-text-o"></i>
+                            <span>MY FILES</span>
+                            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                        </a>
+                    </li>
                 </ul>
-            	<div class="powered-by sidebar-menu" style="background-color: #fff; text-align: center;">Secured and powered by <br><img src="Images/pfortner.png"></div>    
+            	<div class="powered-by sidebar-menu" style="background-color: #fff; text-align: center;    bottom: 0px;position: absolute; width: 100%;">Secured and powered by <br><img src="Images/pfortner.png"></div>    
             </section>
             
             <!-- /.sidebar -->
@@ -254,7 +271,7 @@
                 document.getElementsByClassName("main-header")[0].clientHeight -
                 document.getElementsByClassName("btn-newConv")[0].clientHeight -
                 document.getElementsByClassName("powered-by")[0].clientHeight -
-                document.getElementsByClassName("sidebar-form")[0].clientHeight - 85
+                document.getElementsByClassName("sidebar-form")[0].clientHeight - 175
 
             ) + "px";
 

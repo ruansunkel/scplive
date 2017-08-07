@@ -42,6 +42,11 @@
     padding-top: 6px;
     border-bottom: 1px solid #424242;
 }
+.skin-blue .directchat-list-li {
+    height: 42px;
+    padding-top: 6px;
+    border-bottom: 1px solid #424242;
+}
 .skin-blue .treeview-menu>li>a:hover {
             color: #fff;
         }
@@ -53,6 +58,10 @@
         }
 
 .skin-blue .conversation-list-li:hover {
+            background-color: #6398b7;
+            color: #fff;
+        }
+.skin-blue .directchat-list-li:hover {
             background-color: #6398b7;
             color: #fff;
         }
@@ -262,9 +271,14 @@
         .direct-chat-warning .rightrepeat>.direct-chat-text:before {
                 border: none transparent;
         }  
-
 .skin-blue-light .conversation-list-li {
     height: 70px;
+    padding-top: 6px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.skin-blue-light .directchat-list-li {
+    height: 42px;
     padding-top: 6px;
     border-bottom: 1px solid #f1f1f1;
 }
@@ -279,6 +293,10 @@
         }
 
 .skin-blue-light .conversation-list-li:hover {
+            background-color: #75D26B;
+            color: #fff;
+        }
+.skin-blue-light .directchat-list-li:hover {
             background-color: #75D26B;
             color: #fff;
         }
@@ -515,6 +533,12 @@
     padding-top: 6px;
     border-bottom: 1px solid #424242;
 }
+.skin-black .directchat-list-li {
+    height: 42px;
+    padding-top: 6px;
+    border-bottom: 1px solid #424242;
+}
+
 .skin-black .treeview-menu>li>a:hover {
             color: #fff;
         }
@@ -529,7 +553,10 @@
             background-color: #6398b7;
             color: #fff;
         }
-
+.skin-black .directchat-list-li:hover {
+            background-color: #6398b7;
+            color: #fff;
+        }
 
 .skin-black .btn-newConv {
             border-radius: 3px;
@@ -755,6 +782,12 @@
     padding-top: 6px;
     border-bottom: 1px solid #f1f1f1;
 }
+.skin-black-light .directchat-list-li {
+    height: 42px;
+    padding-top: 6px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
 .skin-black-light .treeview-menu>li>a:hover {
             color: #fff;
         }
@@ -769,6 +802,11 @@
             background-color: #808080;
             color: #fff;
         }
+.skin-black-light .directchat-list-li:hover {
+            background-color: #808080;
+            color: #fff;
+        }
+
 
 .skin-black-light .conversation-message {
     display: block;
@@ -1009,6 +1047,12 @@
     padding-top: 6px;
     border-bottom: 1px solid #424242;
 }
+.skin-green .directchat-list-li {
+    height: 42px;
+    padding-top: 6px;
+    border-bottom: 1px solid #424242;
+}
+
 .skin-green .treeview-menu>li>a:hover {
             color: #fff;
         }
@@ -1023,7 +1067,10 @@
             background-color: #5b635f;
             color: #fff;
         }
-
+.skin-green .directchat-list-li:hover {
+            background-color: #5b635f;
+            color: #fff;
+        }
 
 .skin-green .btn-newConv {
             border-radius: 3px;
@@ -1224,6 +1271,12 @@
     padding-top: 6px;
     border-bottom: 1px solid #f1f1f1;
 }
+.skin-green-light .directchat-list-li {
+    height: 42px;
+    padding-top: 6px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
 .skin-green-light .treeview-menu>li>a:hover {
             color: #fff;
         }
@@ -1235,6 +1288,11 @@
         }
 
 .skin-green-light .conversation-list-li:hover {
+            background-color: #75D26B;
+            color: #fff;
+        }
+
+.skin-green-light .directchat-list-li:hover {
             background-color: #75D26B;
             color: #fff;
         }
@@ -1453,12 +1511,18 @@
         .direct-chat-warning .rightrepeat>.direct-chat-text:before {
                 border: none transparent;
         }    
-
 .skin-red .conversation-list-li {
     height: 70px;
     padding-top: 6px;
     border-bottom: 1px solid #424242;
 }
+
+.skin-red .directchat-list-li {
+    height: 42px;
+    padding-top: 6px;
+    border-bottom: 1px solid #424242;
+}
+
 .skin-red .treeview-menu>li>a:hover {
             color: #fff;
         }
@@ -1474,6 +1538,11 @@
             color: #fff;
         }
 
+
+.skin-red .directchat-list-li:hover {
+            background-color: #b76d64;
+            color: #fff;
+        }
 
 .skin-red .btn-newConv {
             border-radius: 3px;
@@ -1678,6 +1747,12 @@
     padding-top: 6px;
     border-bottom: 1px solid #f1f1f1;
 }
+
+.skin-red-light .directchat-list-li {
+    height: 42px;
+    padding-top: 6px;
+    border-bottom: 1px solid #f1f1f1;
+}
 .skin-red-light .treeview-menu>li>a:hover {
             color: #fff;
         }
@@ -1686,6 +1761,11 @@
             background-color: #929292;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             border-bottom: 0px solid #f1f1f1;
+        }
+
+.skin-red-light .conversation-list-li:hover {
+            background-color: #ff6654;
+            color: #fff;
         }
 
 .skin-red-light .conversation-list-li:hover {
@@ -1914,6 +1994,13 @@
     padding-top: 6px;
     border-bottom: 1px solid #424242;
 }
+
+.skin-yellow .directchat-list-li {
+    height: 42px;
+    padding-top: 6px;
+    border-bottom: 1px solid #424242;
+}
+
 .skin-yellow .treeview-menu>li>a:hover {
             color: #fff;
         }
@@ -1929,7 +2016,10 @@
             color: #fff;
         }
 
-
+.skin-yellow .directchat-list-li:hover {
+            background-color: #6d6d6d;
+            color: #fff;
+        }
 .skin-yellow .btn-newConv {
             border-radius: 3px;
             position: relative;
@@ -2130,6 +2220,12 @@
     padding-top: 6px;
     border-bottom: 1px solid #f1f1f1;
 }
+
+.skin-yellow-light .directchat-list-li {
+    height: 42px;
+    padding-top: 6px;
+    border-bottom: 1px solid #f1f1f1;
+}
 .skin-yellow-light .treeview-menu>li>a:hover {
             color: #fff;
         }
@@ -2141,6 +2237,11 @@
         }
 
 .skin-yellow-light .conversation-list-li:hover {
+            background-color: #a4a59c;
+            color: #fff;
+        }
+
+.skin-yellow-light .directchat-list-li:hover {
             background-color: #a4a59c;
             color: #fff;
         }
@@ -2364,6 +2465,14 @@
     padding-top: 6px;
     border-bottom: 1px solid #424242;
 }
+
+
+.skin-purple .directchat-list-li {
+    height: 42px;
+    padding-top: 6px;
+    border-bottom: 1px solid #424242;
+}
+
 .skin-purple .treeview-menu>li>a:hover {
             color: #fff;
         }
@@ -2379,6 +2488,10 @@
             color: #fff;
         }
 
+.skin-purple .directchat-list-li:hover {
+            background-color: #8481af;
+            color: #fff;
+        }
 
 .skin-purple .btn-newConv {
             border-radius: 3px;
@@ -2576,6 +2689,12 @@
     padding-top: 6px;
     border-bottom: 1px solid #f1f1f1;
 }
+
+.skin-purple-light .directchat-list-li {
+    height: 42px;
+    padding-top: 6px;
+    border-bottom: 1px solid #f1f1f1;
+}
 .skin-purple-light .treeview-menu>li>a:hover {
             color: #fff;
         }
@@ -2587,6 +2706,11 @@
         }
 
 .skin-purple-light .conversation-list-li:hover {
+            background-color: #8481af;
+            color: #fff;
+        }
+
+.skin-purple-light .directchat-list-li:hover {
             background-color: #8481af;
             color: #fff;
         }

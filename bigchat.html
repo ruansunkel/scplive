@@ -90,7 +90,13 @@
                 </form>
                 
                 <ul class="sidebar-menu">
+                    <li >
+                        <a href="#">
+                            <i class="fa fa-file-text-o"></i>
+                            <span>MY FILES</span>
 
+                        </a>
+                    </li>
                     <li class="active treeview">
                         <a href="#">
                             <i class="fa fa-users"></i>
@@ -109,13 +115,7 @@
                         <ul class="treeview-menu" id="direct-chats-container" style="overflow-y: overlay;-webkit-overflow-scrolling: touch;">
                         </ul>
                     </li>
-                    <li >
-                        <a href="#">
-                            <i class="fa fa-file-text-o"></i>
-                            <span>MY FILES</span>
-                            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                        </a>
-                    </li>
+                    
                 </ul>
             	<div class="powered-by sidebar-menu" style="background-color: #fff; text-align: center;    bottom: 0px;position: absolute; width: 100%;">Secured and powered by <br><img src="Images/pfortner.png"></div>    
             </section>
@@ -430,7 +430,7 @@
 					});
 
                     $("#conversation-container>li.conversation-list-active").removeClass("conversation-list-active");
-
+                    $("#direct-chat-container>li.conversation-list-active").removeClass("conversation-list-active");
                     document.getElementById("message-container").innerHTML = "";
                     li.setAttribute("class", "conversation-list-li conversation-list-active");
                     //*************************************////*************************************//
@@ -438,7 +438,7 @@
                     li.classList.remove("unread");
                     console.log("Change back");
                     change_favicon('favicon.ico');
-                    populateMessages(element);
+                    populateMessages(element, "C");
                     conversationId = element.id;
                     if (window.outerWidth <767){
                         $('body').removeClass("sidebar-open");
@@ -448,6 +448,13 @@
                         document.getElementById("mainchatBox").style.display = ""
                         document.getElementById("mainconCreate").style.display = "none"
                         document.getElementById("conv-userlist").style.display = ""
+                    }
+                    for (var i = 0; i < document.getElementById("direct-chats-container").children.length; i++) {
+                        if (parseInt(document.getElementById("direct-chats-container").children[i].getAttribute("conversation-id")) === conversationId) {
+                            document.getElementById("direct-chats-container").children[i].classList.add("conversation-list-active");
+                    
+                            //setAttribute("class", "directchat-list-li conversation-list-active");
+                        }
                     }
                 }
 
@@ -462,7 +469,130 @@
                     //setAttribute("class", "conversation-list-li conversation-list-active");
                 }
             }
+            for (var i = 0; i < document.getElementById("direct-chats-container").children.length; i++) {
+                if (parseInt(document.getElementById("direct-chats-container").children[i].getAttribute("conversation-id")) === conversationId) {
+                    document.getElementById("direct-chats-container").children[i].classList.add("conversation-list-active");
+                    
+                    //setAttribute("class", "directchat-list-li conversation-list-active");
+                }
+            }
         }
+
+
+        // DIrect Chat Functions
+        function renderDirectChats(conversations) {
+            conversations.reverse().forEach(function(element) {
+                // Loop through current conversations and remove existing conversations
+                for (var i = 0; i < document.getElementById("direct-chats-container").children.length; i++) {
+                    if (parseInt(document.getElementById("direct-chats-container").children[i].getAttribute("conversation-id")) === element.cid) {
+                        document.getElementById("direct-chats-container").children[i].remove();
+                    }
+                }
+
+                // Create html element
+                var li = document.createElement("li");
+                li.setAttribute("class", "directchat-list-li");
+                li.setAttribute("conversation-id", element.cid);
+                document.getElementById("direct-chats-container").insertBefore(li, document.getElementById("direct-chats-container").firstChild);
+                var href = document.createElement("a");
+                href.setAttribute("href", "#");
+                li.appendChild(href);
+
+                var convImg;
+                var convSubject;
+
+                    convImg = "https://ucsecure.pfortner.co.za//media/avatar/" + element.id + "/24x24/private";
+                    convSubject = element.user_name;
+
+                //*************************************////*************************************//
+                if ((element.flags & 1) === 1) {
+                    console.log("Change icon" );
+                    change_favicon('faviconalert.ico');
+                    li.classList.add("unread");
+                }
+
+				// Always show unread marker when conversation has been updated
+				if (MSCT > 0) {
+					if (element.value !== lastMessage) {
+						change_favicon('faviconalert.ico');
+						li.classList.add("unread");
+					}
+				}
+
+                var convDiv = document.createElement("div");
+                href.appendChild(convDiv);
+
+                var convDivImg = document.createElement("img");
+                convDivImg.setAttribute("style", "height:24px;width:24px;vertical-align: middle;display: inline-block;margin-right: 10px;");
+                convDivImg.setAttribute("class", "direct-chat-img");
+                convDivImg.setAttribute("src", convImg);
+                convDivImg.setAttribute("border", "0");
+                convDiv.appendChild(convDivImg);
+
+                var convDivTxt = document.createElement("div");
+                convDivTxt.setAttribute("style", "vertical-align: middle;display: inline-block; font-size: medium;");
+                convDiv.appendChild(convDivTxt);
+
+                    
+                convDivTxt.innerHTML=convSubject
+
+
+                // Set click listener
+                href.onclick = function() {
+					// If current active conversation had unread marker, remove it
+					Array.prototype.forEach.call(document.getElementsByClassName("conversation-list-active"), function(element) {
+						element.classList.remove("unread");
+					});
+
+                    $("#direct-chats-container>li.conversation-list-active").removeClass("conversation-list-active");
+                    $("#conversation-container>li.conversation-list-active").removeClass("conversation-list-active");
+                    document.getElementById("message-container").innerHTML = "";
+                    li.setAttribute("class", "directchat-list-li conversation-list-active");
+                    //*************************************////*************************************//
+                    //*************************************////*************************************//
+                    li.classList.remove("unread");
+                    console.log("Change back");
+                    change_favicon('favicon.ico');
+                    populateMessages(element,"D");
+                    conversationId = element.cid;
+                    if (window.outerWidth <767){
+                        $('body').removeClass("sidebar-open");
+                       // $('body').addClass("sidebar-collapse");
+                    }
+                    if (document.getElementById("mainconCreate").style.display == ""){
+                        document.getElementById("mainchatBox").style.display = ""
+                        document.getElementById("mainconCreate").style.display = "none"
+                        document.getElementById("conv-userlist").style.display = ""
+                    }
+                    for (var i = 0; i < document.getElementById("conversation-container").children.length; i++) {
+                        if (parseInt(document.getElementById("conversation-container").children[i].getAttribute("conversation-id")) === conversationId) {
+                            document.getElementById("conversation-container").children[i].classList.add("conversation-list-active");
+                    
+                            //setAttribute("class", "conversation-list-li conversation-list-active");
+                        }
+                    }
+                }
+
+
+            }, this);
+
+            // Set selected conversation
+            for (var i = 0; i < document.getElementById("direct-chats-container").children.length; i++) {
+                if (parseInt(document.getElementById("direct-chats-container").children[i].getAttribute("conversation-id")) === conversationId) {
+                    document.getElementById("direct-chats-container").children[i].classList.add("conversation-list-active");
+                    
+                    //setAttribute("class", "directchat-list-li conversation-list-active");
+                }
+            }
+            for (var i = 0; i < document.getElementById("conversation-container").children.length; i++) {
+                if (parseInt(document.getElementById("conversation-container").children[i].getAttribute("conversation-id")) === conversationId) {
+                    document.getElementById("conversation-container").children[i].classList.add("conversation-list-active");
+                    
+                    //setAttribute("class", "directchat-list-li conversation-list-active");
+                }
+            }
+        }
+
 
         function populateConversations(foceconversationid=null) {
             //console.log("Populate Conversation");
@@ -477,23 +607,13 @@
                             TIMESTAMP = conversation.created + 1;
                         }
                     });
-                    //console.log(conversations);
-                   // if (foceconversationid==null){
-                        populateMessages(conversations[0]);
+                        populateMessages(conversations[0],"C");
                         conversationId = conversations[0].id;
-                   // }else{
-                    //    var index = conversations.map(function (myid) { return myid.id; }).indexOf(foceconversationid);
-
-                    //    console.log(index);
-                    //    populateMessages(conversations[index]);
-                    //    conversationId = conversations[index].id; 
-                   // }
                     renderConversations(conversations);
                 }
 
                 // Start Conversation Polling
                 conversationPollTimer = setInterval(function() {
-                    //console.log("populateConversations - Timer - renderConversations");
                     scpAPICall("conversations/list", function(response) {
                         conversations = JSON.parse(response).items;
 
@@ -514,8 +634,36 @@
             }, "ps=10&pg=1&op=16");
         }
 
+        function populateDirectChats(foceconversationid=null) {
+            //console.log("Populate Conversation");
+            scpAPICall("conversation/recipients/private", function(response) {
+                directchats = JSON.parse(response);
+
+                // Fetch messages of first conversation
+                if (directchats) {
+                        //populateMessages(directchats[0]);
+                        //conversationId = directchats[0].id;
+                    renderDirectChats(directchats);
+                }
+
+                // Start Conversation Polling
+                conversationPollTimer = setInterval(function() {
+                    scpAPICall("conversations/recipients/private", function(response) {
+                        directchats = JSON.parse(response);
+
+                        if (directchats) {
+                            console.log("new direct chat found");
+                            renderDirectChats(directchats);
+                        }
+                    },"");
+                }, 3000);
+
+               // document.getElementById("direct-chats-container").children[0].setAttribute("class", "conversation-list-li conversation-list-active");
+            },"");
+        }
+
         // Message Functions
-        function renderMessages(conversation, messagesResponse) {
+        function renderMessages(conversation, messagesResponse, callsource) {
             //console.log("write message");
             // set overlay
             var messageovelay = document.getElementById("message-loading-overlay");
@@ -524,11 +672,16 @@
             messagespinner.setAttribute("class", "fa fa-refresh fa-spin");
 
             // Set Conversation Title
-            if ((conversation.flags & 16) === 16) {
-                document.getElementById("conversation-title-bar").innerHTML = "Direct Chat";
-            } else {
-                document.getElementById("conversation-title-bar").innerHTML = "<strong>"+conversation.subject+"</strong>";
+            if (callsource=="C"){
+                if ((conversation.flags & 16) === 16) {
+                    document.getElementById("conversation-title-bar").innerHTML = "Direct Chat";
+                } else {
+                    document.getElementById("conversation-title-bar").innerHTML = "<strong>"+conversation.subject+"</strong>";
+                }
+            }else if (callsource=="D"){
+                document.getElementById("conversation-title-bar").innerHTML = "Direct Chat - <strong>" + conversation.user_name + "</strong>";
             }
+            
 
             // Set Participants - Right Sidebar
             document.getElementById("sidebar-users").innerHTML="";
@@ -762,8 +915,14 @@
 			element.scrollTop = Number.MAX_SAFE_INTEGER;
         }
 
-        function getAndRenderMessages(conversation) {
+        function getAndRenderMessages(conversation, callsource) {
             
+            if (callsource=="C"){
+                callsourceID=conversation.id;
+            }else if (callsource=="D"){
+                callsourceID=conversation.cid;
+            }
+
             scpAPICall("conversation/messages", function(response) {
                 // Parse Response
                 response = JSON.parse(response);
@@ -774,12 +933,12 @@
                     MSCT = response.items[0].id;
                     //console.log("getAndRenderMessages");
                     // Render Messages
-                    renderMessages(conversation, response);
+                    renderMessages(conversation, response, callsource);
                 }
-            }, "id=" + conversation.id + "&mi=" + MSCT);
+            }, "id=" + callsourceID + "&mi=" + MSCT);
         }
 
-        function populateMessages(conversation) {
+        function populateMessages(conversation, callsource) {
             //console.log("populateMessages");
             clearInterval(pollTimer);
             MSCT = 0;
@@ -788,7 +947,7 @@
 
             pollTimer = setInterval(function() {
                 //console.log("populateMessages - Timer - getAndRenderMessages");
-                getAndRenderMessages(conversation);
+                getAndRenderMessages(conversation, callsource);
             }, 2000);
         }
 
@@ -895,6 +1054,7 @@
             if (response > 0) {
                 populateDetails();
                 populateConversations();
+                populateDirectChats();
                 initializeClickHandlers();
             } else {
                 window.location = "/index.html";
